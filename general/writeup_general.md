@@ -2,11 +2,11 @@
 ---
 > #### 11. Greatest Commond Divisor
 
-> Tóm tắt:
+> Given
 - Greatest Commond Divisor (GCD) là số nguyên dương lớn nhất có thể chia hết cho cả hai số a và b.
 - Coprime (Nguyên tố cùng nhau): Hai số $a$ và $b$ được gọi là nguyên tố cùng nhau nếu `gcd(a, b) = 1`.
 
-> Goal: 
+> Goal 
 - Tìm được flag của cái bài này bằng cách tính ra kết quả ước chung lớn nhất giữa 66528 và 52920 (`gcd(66528,52920)`).
 
 > Solution
@@ -35,7 +35,7 @@ Chạy code ra được flag (kết quả của `gcd(66528,52920)`):
 ---
 > #### 12 Extended GCD
 
-> Tóm tắt
+> Given
 - Bài toán giới thiệu Thuật toán Euclid mở rộng (Extended Euclidean Algorithm). Nó không chỉ tìm Ước chung lớn nhất (GCD) như thuật toán thường, mà còn tìm ra hai số nguyên $u, v$ thỏa mãn Đồng nhất thức Bézout:$$a \cdot u + b \cdot v = \gcd(a, b)$$
 > Goal
 - Euclid mở rộng để tính ra hai hệ số $u$ và $v$ của phương trình: 
@@ -80,7 +80,7 @@ print(flag)
 
 > #### 13. Modular Arithmetic 1
 
-> Tóm tắt
+> Given
 - Đề bài giới thiệu Số học Module (Modular Arithmetic).
 - Định nghĩa: Ký hiệu $a \equiv b \pmod m$ hiểu đơn giản là: khi lấy số $a$ chia cho số $m$, ta được phần dư là $b$.
 > Goal
@@ -100,7 +100,7 @@ flag = min(x, y)
 
 ---
 > #### 14. Modular Arithmetic 2
-> Tóm tắt
+> Given
 - Đề bài giới thiệu về Trường hữu hạn (Finite Field).
 - Chúng ta cần sử dụng định lý nhỏ Fermat để làm bài này.
 - Định lý nhỏ Fermat phát biểu rằng: Nếu $p$ là số nguyên tố, thì với mọi số nguyên $a$ (không chia hết cho $p$), ta luôn có:$$a^{p-1} \equiv 1 \pmod p$$
@@ -128,7 +128,7 @@ print(result)
 
 ---
 > #### 15. Modular Inverting
-> Tóm tắt
+> Given
 - Đề bài giới thiệu khái niệm Nghịch đảo nhân (Multiplicative Inverse) trong trường hữu hạn $F_p$.
 - Định nghĩa: Phần tử $d$ được gọi là nghịch đảo của $g$ trong modulo $p$ nếu tích của chúng chia cho $p$ dư 1. Ký hiệu toán học: $$g \cdot d \equiv 1 \pmod p$$
 (Người ta thường ký hiệu $d$ là $g^{-1}$).
@@ -169,3 +169,6 @@ print(inverse)
 > Kết quả: `9`
 
 ![Kết quả](modular_inverting.png)
+
+
+---
