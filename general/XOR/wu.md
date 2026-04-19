@@ -172,7 +172,7 @@
 
     # Bước 1: XOR phần đầu ciphertext với known plaintext để lấy một phần key
     key_partial = bytes(c ^ p for c, p in zip(ciphertext, known))
-    ##### → b'myXORke' → suy đoán key đầy đủ là b'myXORkey'
+    ##### → b'myXORke' -> suy đoán key đầy đủ là b'myXORkey'
 
     # Bước 2: Lặp key để phủ toàn bộ độ dài ciphertext
     key = b"myXORkey"
@@ -191,7 +191,7 @@
 ## 10. Lemur XOR
 
 ### Given
-- Hai file ảnh bị mã hóa: `flag_[đuôi hash].jpg` và `lemur_[đuôi hash].jpg`. Hiện tại khi nhìn vào, cả hai ảnh chỉ hiển thị nhiễu hạt (noise).
+- Hai file ảnh bị mã hóa: `flag.png` và `lemur.png`. Hiện tại khi nhìn vào, cả hai ảnh chỉ hiển thị nhiễu hạt (noise).
 
 - Hai ảnh này đã được ẩn đi bằng cách XOR với cùng một `secret key`.
 
@@ -206,8 +206,8 @@
     - Self-Inverse: $$A ⊕ A = 0$$
 
 - **Giả sử:**
-    - $M_1$ là mảng pixel của `flag_[đuôi hash].jpg`.
-    - $M_2$ là mảng pixel của `lemur_[đuôi hash].jpg`.
+    - $M_1$ là mảng pixel của `flag.png`.
+    - $M_2$ là mảng pixel của `lemur.png`.
     - $K$ là Secret Key.
 
 - Theo đề bài, hai ảnh bị nhiễu mà chúng ta đang có chính là các **Ciphertext**:
@@ -223,23 +223,29 @@
     ```python
     from PIL import Image
     import numpy as np
+    import os
 
-    # Bước 1: Tải hai hình ảnh đã cho
-    img_flag = Image.open("flag_7ae18c704272532658c10b5faad06d74.jpg")
-    img_lemur = Image.open("lemur_ed66878c338e662d3473f0d98eedbd0d.jpg")
+    # Bước 1: Thiết lập đường dẫn file chính xác (tránh lỗi FileNotFound)
+    current_dir = os.path.dirname(os.path.abspath(__file__))
+    file_path_flag = os.path.join(current_dir, "flag.png")
+    file_path_lemur = os.path.join(current_dir, "lemur.png")
 
-    # Bước 2: Chuyển đổi hình ảnh thành mảng dữ liệu (numpy array) chứa các byte RGB
+    # Bước 2: Tải dữ liệu ảnh từ bộ nhớ
+    img_flag = Image.open(file_path_flag)
+    img_lemur = Image.open(file_path_lemur)
+
+    # Bước 3: Chuyển đổi ảnh sang dạng mảng NumPy để tính toán
     arr_flag = np.array(img_flag)
     arr_lemur = np.array(img_lemur)
 
-    # Bước 3: Thực hiện phép toán bitwise XOR giữa 2 mảng ảnh
+    # Bước 4: Thực hiện phép toán bitwise XOR giữa hai lớp ảnh
     result_arr = np.bitwise_xor(arr_flag, arr_lemur)
 
-    # Bước 4: Chuyển mảng kết quả ngược lại thành định dạng hình ảnh
+    # Bước 5: Chuyển đổi mảng kết quả ngược lại về định dạng ảnh
     result_img = Image.fromarray(result_arr)
 
-    # Bước 5: Lưu kết quả và mở lên để xem flag
-    result_img.save("decrypted_flag.jpg")
+    # Bước 6: Lưu tệp và hiển thị kết quả "decrypted_flag.png"
+    result_img.save(os.path.join(current_dir, "decrypted_flag.png"))
     result_img.show()
     ```
 
