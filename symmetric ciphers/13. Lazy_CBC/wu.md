@@ -133,3 +133,5 @@
 - **Kết quả:**
 
     ![alt text](image.png)
+
+    > **Bài học:** IV phải là giá trị ngẫu nhiên, dùng một lần (nonce) — không được tái sử dụng, và tuyệt đối không dùng key làm IV. Khi IV = KEY, bất kỳ ai quan sát được plaintext/ciphertext đều có thể khôi phục key chỉ với vài phép XOR đơn giản.
