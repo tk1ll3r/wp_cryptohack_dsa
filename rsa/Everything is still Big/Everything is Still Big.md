@@ -1,0 +1,46 @@
+
+## **Everything is Still Big (100 pts)**
+![alt text](image-54-1.png)
+### **1. Given**
+Một hệ thống mã hóa RSA với Modulus $N$, số mũ công khai $e$ và Ciphertext $ct$ đều là các số cực kỳ lớn (2048-bit)[cite: 11].
+Tên bài toán ám chỉ đây là phiên bản nâng cấp của "Everything is Big". [cite_start]Tuy nhiên, các giá trị $e$ và $d$ (số mũ bí mật) đã được điều chỉnh để tránh cuộc tấn công Wiener cơ bản[cite: 11].
+
+### **2. Goal**
+Khai thác cấu trúc của các số mũ RSA khi chúng quá lớn để tìm ra số mũ bí mật $d$ và giải mã Flag.
+
+### **3. Solution**
+
+#### **Phân tích lỗ hổng**
+Mặc dù $e$ rất lớn, nhưng thử thách này vẫn đánh vào điểm yếu của việc chọn số mũ không an toàn. [cite_start]Khi $e$ có độ lớn xấp xỉ $N$, có khả năng cao là $d$ vẫn đủ nhỏ để bị tấn công bởi **Boneh-Durfee Attack**[cite: 11]. 
+**Wiener's Attack** hoạt động khi $d < \frac{1}{3}N^{0.25}$.
+**Boneh-Durfee Attack** là một bản nâng cấp sử dụng phương pháp Coppersmith (tìm nghiệm nhỏ của đa thức đa biến) để phá vỡ RSA khi $d < N^{0.292}$[cite: 11].
+
+#### **Các bước thực hiện**
+1.  [cite_start]**Xác định dạng tấn công:** Kiểm tra giá trị $e$ và $N$ từ file dữ liệu[cite: 11]. Nhận thấy $e$ rất lớn, ta áp dụng Boneh-Durfee Attack.
+2.  **Thiết lập đa thức:** Xây dựng đa thức $f(x, y) = x(A + y) - 1 \equiv 0 \pmod e$, trong đó $x$ liên quan đến $d$ và $y$ liên quan đến $(p+q)$.
+3.  [cite_start]**Sử dụng Lattice Reduction (LLL):** Tìm nghiệm nhỏ của đa thức trên bằng cách sử dụng thuật toán LLL (thường thực hiện trong môi trường `SageMath`)[cite: 11].
+4.  **Khôi phục $d$:** Từ nghiệm của đa thức, ta tính toán ngược lại để tìm ra số mũ bí mật $d$.
+5.  [cite_start]**Giải mã:** * Tính $m = ct^d \pmod N$[cite: 11].
+    * [cite_start]Chuyển đổi kết quả $m$ từ số nguyên sang bytes bằng hàm `long_to_bytes()` để thu được Flag[cite: 11].
+
+
+``` python 
+import math
+
+# Hàm hỗ trợ chuyển đổi số nguyên thành bytes nếu bạn chưa cài thư viện Crypto
+def long_to_bytes(n):
+    return n.to_bytes((n.bit_length() + 7) // 8, 'big')
+
+# Dữ liệu đầy đủ từ file output_f554de954a6cd0a94142afc264107558.txt
+N = 0xb12746657c720a434861e9a4828b3c89a6b8d4a1bd921054e48d47124dbcc9cfcdcc39261c5e93817c167db818081613f57729e0039875c72a5ae1f0bc5ef7c933880c2ad528adbc9b1430003a491e460917b34c4590977df47772fab1ee0ab251f94065ab3004893fe1b2958008848b0124f22c4e75f60ed3889fb62e5ef4dcc247a3d6e23072641e62566cd96ee8114b227b8f498f9a578fc6f687d07acdbb523b6029c5bbeecd5efaf4c4d35304e5e6b5b95db0e89299529eb953f52ca3247d4cd03a15939e7d638b168fd00a1cb5b0cc5c2cc98175c1ad0b959c2ab2f17f917c0ccee8c3fe589b4cb441e817f75e575fc96a4fe7bfea897f57692b050d2b
+e = 0x9d0637faa46281b533e83cc37e1cf5626bd33f712cc1948622f10ec26f766fb37b9cd6c7a6e4b2c03bce0dd70d5a3a28b6b0c941d8792bc6a870568790ebcd30f40277af59e0fd3141e272c48f8e33592965997c7d93006c27bf3a2b8fb71831dfa939c0ba2c7569dd1b660efc6c8966e674fbe6e051811d92a802c789d895f356ceec9722d5a7b617d21b8aa42dd6a45de721953939a5a81b8dffc9490acd4f60b0c0475883ff7e2ab50b39b2deeedaefefffc52ae2e03f72756d9b4f7b6bd85b1a6764b31312bc375a2298b78b0263d492205d2a5aa7a227abaf41ab4ea8ce0e75728a5177fe90ace36fdc5dba53317bbf90e60a6f2311bb333bf55ba3245f
+c = 0xa3bce6e2e677d7855a1a7819eb1879779d1e1eefa21a1a6e205c8b46fdc020a2487fdd07dbae99274204fadda2ba69af73627bdddcb2c403118f507bca03cb0bad7a8cd03f70defc31fa904d71230aab98a10e155bf207da1b1cac1503f48cab3758024cc6e62afe99767e9e4c151b75f60d8f7989c152fdf4ff4b95ceed9a7065f38c68dee4dd0da503650d3246d463f504b36e1d6fafabb35d2390ecf0419b2bb67c4c647fb38511b34eb494d9289c872203fa70f4084d2fa2367a63a8881b74cc38730ad7584328de6a7d92e4ca18098a15119baee91237cea24975bdfc19bdbce7c1559899a88125935584cd37c8dd31f3f2b4517eefae84e7e588344fa5
+
+# Số d đã được tìm thấy qua thuật toán Wiener's attack
+d = 4405001203086303853525638270840706181413309101774712363141310824943602913458674670435988275467396881342752245170076677567586495166847569659096584522419007
+
+# Giải mã và in kết quả
+m = pow(c, d, N)
+print(f"Flag: {long_to_bytes(m).decode()}")
+```
+`crypto{bon3h5_4tt4ck_i5_sr0ng3r_th4n_w13n3r5}`
