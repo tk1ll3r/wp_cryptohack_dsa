@@ -642,9 +642,9 @@ print(inverse)
 
 ## **16. Data Formats**
 ### 1.Given 
-![alt text](image-2.png)
-![alt text](image-3.png)
-![alt text](image-5.png)
+![alt text](assets/general/16_1.png)
+![alt text](assets/general/16_2.png)
+![alt text](assets/general/16_3.png)
 ### 2.Goal
 * **Mục tiêu:** Trích xuất giá trị số nguyên thập phân của số mũ bí mật (**private key $d$**) từ một file định dạng **.pem**.
 * **Định dạng PEM:** Là một dạng "bao bì" (container) chứa dữ liệu đã được mã hóa **Base64**. Dữ liệu bên trong Base64 tuân theo cấu trúc **ASN.1** và được mã hóa bằng chuẩn **DER**.
@@ -697,15 +697,15 @@ print(key.d)
 
 ### 4. Kết quả
 Sau khi chạy script, chương trình xuất ra một số nguyên cực lớn bắt đầu bằng `156827...`. Đây chính là giá trị cần tìm.
-![alt text](image-6.png)
+![alt text](assets/general/16_4.png)
 * **Flag:** `15682700288056331364787171045819973654991149949197959929860861228180021707316851924456205543665565810892674190059831330231436970914474774562714945620519144389785158908994181951348846017432506464163564960993784254153395406799101314760033445065193429592512349952020982932218524462341002102063435489318813316464511621736943938440710470694912336237680219746204595128959161800595216366237538296447335375818871952520026993102148328897083547184286493241191505953601668858941129790966909236941127851370202421135897091086763569884760099112291072056970636380417349019579768748054760104838790424708988260443926906673795975104689`
 
-![alt text](image-4.png)
+![alt text](assets/general/16_5.png)
 
 
 
 ## **17. CERTainly not**
-![alt text](image-7-1.png)
+![alt text](assets/general/17_1.png)
 ### 1. Given
 Một file chứng chỉ số RSA định dạng **DER** (`2048b-rsa-example-cert.der`)[cite: 2].
 Định dạng DER là một phương pháp mã hóa nhị phân cho các cấu trúc dữ liệu ASN.1, thường được sử dụng trong các tiện ích của Windows hoặc các hệ thống nhúng[cite: 4].
@@ -745,12 +745,12 @@ print(key.n)
 `22825373692019530804306212864609512775374171823993708516509897631547513634635856375624003737068034549047677999310941837454378829351398302382629658264078775456838626207507725494030600516872852306191255492926495965536379271875310457319107936020730050476235278671528265817571433919561175665096171189758406136453987966255236963782666066962654678464950075923060327358691356632908606498231755963567382339010985222623205586923466405809217426670333410014429905146941652293366212903733630083016398810887356019977409467374742266276267137547021576874204809506045914964491063393800499167416471949021995447722415959979785959569497`
 
 
-![alt text](image-8.png)
+![alt text](assets/general/17_2.png)
 
 
 ## **18. SSH Keys**
-![alt text](image-12-1.png)
-![alt text](image-13-1.png)
+![alt text](assets/general/18_1.png)
+![alt text](assets/general/18_2.png)
 ### **1. Phân tích (Given)**
 * **Dữ liệu:** Một file `bruce_rsa.pub` chứa khóa công khai SSH.
 * **Định dạng:** Khóa SSH công khai có cấu trúc khác với file PEM truyền thống. Nó bắt đầu bằng loại thuật toán (`ssh-rsa`), theo sau là một chuỗi Base64 và cuối cùng là comment (email/tên máy).
