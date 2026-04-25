@@ -318,8 +318,15 @@ for c1, c2 in combinations(stream_bytes, 2):
 --- 
 
 > #### 20. Dancing Queen
-
-> Solution
+### Given
+- Một challenge tên “Dancing Queen”.
+- Tác giả tự triển khai (custom) thuật toán ChaCha20 thay vì dùng chuẩn.
+- Có 2 file được cung cấp: chacha20.py (code triển khai thuật toán), output.txt (ciphertext / dữ liệu đã mã hóa)
+### Goal
+- Phân tích implementation ChaCha20 tùy chỉnh để tìm ra sai sót hoặc điểm yếu.
+- Từ đó giải mã output.txt và khôi phục plaintext.
+- Thu được flag dạng crypto{...}.
+### Solution
 ```python
 
  
