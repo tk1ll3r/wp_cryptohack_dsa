@@ -1,6 +1,5 @@
-# General
----
-## 1. ASCII
+# **General**
+## **1. ASCII**
 
 ### Given
 ASCII là một chuẩn mã hóa 7 bit cho phép biểu diễn văn bản bằng các số nguyên từ 0 đến 127.
@@ -23,9 +22,8 @@ print(s)
 
 Chạy code ra được flag `cypto{ASCII_pr1nt4bl3}`
 
----
 
-## 2. HEX
+## **2. HEX**
 
 ### Given
 - Hệ thập lục phân có thể được sử dụng theo cách này để biểu diễn các chuỗi ASCII. 
@@ -52,8 +50,8 @@ print(flag)
 
 `crypto{You_will_be_working_with_hex_strings_a_lot}`
 
----
-## 3. BASE64
+
+## **3. BASE64**
 
 ### Given
 - Một lược đồ mã hóa phổ biến khác là Base64, cho phép chúng ta biểu diễn dữ liệu nhị phân dưới dạng chuỗi ASCII bằng bảng chữ cái gồm 64 ký tự.
@@ -80,8 +78,8 @@ print(encoded.decode())
 `crypto/Base+64+Encoding+is+Web+Safe/`
 
 
----
-## 4. Bytes and Big Integers
+
+## **4. Bytes and Big Integers**
 
 ### Given
 - Các hệ mật mã như RSA hoạt động trên các con số, nhưng thông điệp lại được tạo thành từ các ký tự.
@@ -105,8 +103,8 @@ print(b.decode())
 `crypto{3nc0d1n6_4ll_7h3_w4y_d0wn}`
 
 
----
-## 5. Encoding Challenge
+
+## **5. Encoding Challenge**
 
 ### Given
 - Đây là một bài **interactive challenge**.
@@ -184,8 +182,9 @@ with socket.create_connection((HOST, PORT)) as s:
 ### Kết quả
 `crypto{3nc0d3_d3c0d3_3nc0d3}`
 
----
-## 6. XOR Starter
+
+
+## **6. XOR Starter**
 ### Given
 - XOR (^) là phép toán bitwise: trả về 0 nếu hai bit giống nhau, 1 nếu khác nhau.
 
@@ -229,8 +228,8 @@ with socket.create_connection((HOST, PORT)) as s:
 
 `crypto{aloha}`
 
----
-## 7. XOR Properties
+
+## **7. XOR Properties**
 ### Given
 - Bài cung cấp 4 dòng dữ liệu dưới dạng `hex`:
     ```python
@@ -289,8 +288,8 @@ with socket.create_connection((HOST, PORT)) as s:
 ### Kết quả
 `crypto{x0r_i5_ass0c1at1v3}`
 
----
-## 8. Favourite byte
+
+## **8. Favourite byte**
 
 ### Given
 - Đề bài cung cấp một chuỗi hex:
@@ -326,8 +325,8 @@ with socket.create_connection((HOST, PORT)) as s:
 ### Kết quả
 `crypto{0x10_15_my_f4v0ur173_by7e}`
 
----
-## 9. You either know, XOR you don't
+
+## **9. You either know, XOR you don't**
 
 ### Given
 - Chuỗi hex đã được mã hóa:
@@ -369,8 +368,8 @@ with socket.create_connection((HOST, PORT)) as s:
 ### Kết quả
 `crypto{1f_y0u_Kn0w_En0uGH_y0u_Kn0w_1t_4ll}`
 
----
-## 10. Lemur XOR
+
+## **10. Lemur XOR**
 
 ### Given
 - Hai file ảnh bị mã hóa: `flag.png` và `lemur.png`. Hiện tại khi nhìn vào, cả hai ảnh chỉ hiển thị nhiễu hạt (noise).
@@ -435,8 +434,8 @@ with socket.create_connection((HOST, PORT)) as s:
 
 `crypto{XORly_n0t!}`
 
----
-## 11. Greatest Common Divisor
+
+## **11. Greatest Common Divisor**
 
 ### Given
 - Greatest Common Divisor (GCD) là số nguyên dương lớn nhất có thể chia hết cho cả hai số a và b.
@@ -469,9 +468,9 @@ print(gcd(66528, 52920))
 `1512`
 
 
----
 
-## 12. Extended GCD
+
+## **12. Extended GCD**
 
 ### Given
 - Bài toán giới thiệu Thuật toán Euclid mở rộng (Extended Euclidean Algorithm). Nó không chỉ tìm Ước chung lớn nhất (GCD) như thuật toán thường, mà còn tìm ra hai số nguyên $u, v$ thỏa mãn Đồng nhất thức Bézout:
@@ -519,9 +518,9 @@ print(flag)
 `-8404`
 
 
----
 
-## 13. Modular Arithmetic 1
+
+## **13. Modular Arithmetic 1**
 
 ### Given
 - Đề bài giới thiệu Số học Module (Modular Arithmetic).
@@ -544,9 +543,9 @@ flag = min(x, y)
 ### Kết quả
 `4`
 
----
 
-## 14. Modular Arithmetic 2
+
+## **14. Modular Arithmetic 2**
 
 ### Given
 - Đề bài giới thiệu về Trường hữu hạn (Finite Field).
@@ -583,9 +582,9 @@ print(result)
 ### Kết quả
 `1`
 
----
 
-## 15. Modular Inverting
+
+## **15. Modular Inverting**
 
 ### Given
 - Đề bài giới thiệu khái niệm Nghịch đảo nhân (Multiplicative Inverse) trong trường hữu hạn $F_p$.
@@ -641,5 +640,150 @@ print(inverse)
 ### Kết quả
 `9`
 
+## **16. Data Formats**
+### 1.Given 
+![alt text](image-2.png)
+![alt text](image-3.png)
+![alt text](image-5.png)
+### 2.Goal
+* **Mục tiêu:** Trích xuất giá trị số nguyên thập phân của số mũ bí mật (**private key $d$**) từ một file định dạng **.pem**.
+* **Định dạng PEM:** Là một dạng "bao bì" (container) chứa dữ liệu đã được mã hóa **Base64**. Dữ liệu bên trong Base64 tuân theo cấu trúc **ASN.1** và được mã hóa bằng chuẩn **DER**.
+* **Tệp tin cung cấp:** `privacy_enhanced_mail.pem` chứa một khóa RSA Private Key.
+
+### 3. Solution 
+Để giải quyết bài này, chúng ta cần một công cụ có khả năng đọc cấu trúc ASN.1 bên trong file PEM và tách biệt các thành phần của RSA (n, e, d, p, q). Thư viện **PyCryptodome** của Python là công cụ mạnh mẽ nhất cho việc này.
+
+#### Các bước thực hiện:
+1. **Cài đặt thư viện:** Sử dụng lệnh `pip install pycryptodome` (hoặc `py -m pip install pycryptodome` trên Windows).
+2. **Đọc file PEM:** Tải file về và dùng hàm `open()` để đọc nội dung văn bản.
+3. **Import khóa:** Sử dụng hàm `RSA.importKey()` để thư viện tự động giải mã cấu trúc phức tạp bên trong.
+4. **Truy xuất thuộc tính `d`:** Đối tượng khóa sau khi import sẽ có sẵn thuộc tính `.d`.
+
+### 3. Mã khai thác (Exploit Script)
+
+```python
+from Crypto.PublicKey import RSA
+pem_content = """-----BEGIN RSA PRIVATE KEY-----
+MIIEowIBAAKCAQEAzvKDt+EO+A6oE1LItSunkWJ8vN6Tgcu8Ck077joGDfG2NtxD
+4vyQxGTQngr6jEKJuVz2MIwDcdXtFLIF+ISX9HfALQ3yiedNS80n/TR1BNcJSlzI
+uqLmFxddmjmfUvHFuFLvxgXRga3mg3r7olTW+1fxOS0ZVeDJqFCaORRvoAYOgLgu
+d2/E0aaaJi9cN7CjmdJ7Q3m6ryGuCwqEvZ1KgVWWa7fKcFopnl/fcsSecwbDV5hW
+fmvxiAUJy1mNSPwkf5YhGQ+83g9N588RpLLMXmgt6KimtiWnJsqtDPRlY4Bjxdpu
+V3QyUdo2ymqnquZnE/vlU/hn6/s8+ctdTqfSCwIDAQABAoIBAHw7HVNPKZtDwSYI
+djA8CpW+F7+Rpd8vHKzafHWgI25PgeEhDSfAEm+zTYDyekGk1+SMp8Ww54h4sZ/Q
+1sC/aDD7ikQBsW2TitVMTQs1aGIFbLBVTrKrg5CtGCWzHa+/L8BdGU84wvIkINMh
+CtoCMCQmQMrgBeuFy8jcyhgl6nSW2bFwxcv+NU/hmmMQK4LzjV18JRc1IIuDpUJA
+kn+JmEjBal/nDOlQ2v97+fS3G1mBAaUgSM0wwWy5lDMLEFktLJXU0OV59Sh/90qI
+Jo0DiWmMj3ua6BPzkkaJPQJmHPCNnLzsn3Is920OlvHhdzfins6GdnZ8tuHfDb0t
+cx7YSLECgYEA7ftHFeupO8TCy+cSyAgQJ8yGqNKNLHjJcg5t5vaAMeDjT/pe7w/R
+0IWuScCoADiL9+6YqUp34RgeYDkks7O7nc6XuABi8oMMjxGYPfrdVfH5zlNimS4U
+wl93bvfazutxnhz58vYvS6bQA95NQn7rWk2YFWRPzhJVkxvfK6N/x6cCgYEA3p21
+w10lYvHNNiI0KBjHvroDMyB+39vD8mSObRQQuJFJdKWuMq+o5OrkC0KtpYZ+Gw4z
+L9DQosip3hrb7b2B+bq0yP7Izj5mAVXizQTGkluT/YivvgXcxVKoNuNTqTEgmyOh
+Pn6w+PqRnESsSFzjfWrahTCrVomcZmnUTFh0rv0CgYBETN68+tKqNbFWhe4M/Mtu
+MLPhFfSwc8YU9vEx3UMzjYCPvqKqZ9bmyscXobRVw+Tf9llYFOhM8Pge06el74qE
+IvvGMk4zncrn8LvJ5grKFNWGEsZ0ghYxJucHMRlaU5ZbM6PEyEUQqEKBKbbww65W
+T3i7gvuof/iRbOljA9yzdwKBgQDT9Pc+Fu7k4XNRCon8b3OnnjYztMn4XKeZn7KY
+GtW81eBJpwJQEj5OD3OnYQoyovZozkFgUoKDq2lJJuul1ZzuaJ1/Dk+lR3YZ6Wtz
+ZwumCHnEmSMzWyOT4Rp2gEWEv1jbPbZl6XyY4wJG9n/OulqDbHy4+dj5ITb/r93J
+/yLCBQKBgHa8XYMLzH63Ieh69VZF/7jO3d3lZ4LlMEYT0BF7synfe9q6x7s0ia9b
+f6/QCkmOxPC868qhOMgSS48L+TMKmQNQSm9b9oy2ILlLA0KDsX5O/Foyiz1scwr7
+nh6tZ+tVQCRvFviIEGkaXdEiBN4eTbcjfc5md/u9eA5N21Pzgd/G
+-----END RSA PRIVATE KEY-----"""
+
+key = RSA.importKey(pem_content)
+print(key.d)
+```
+
+### 4. Kết quả
+Sau khi chạy script, chương trình xuất ra một số nguyên cực lớn bắt đầu bằng `156827...`. Đây chính là giá trị cần tìm.
+![alt text](image-6.png)
+* **Flag:** `15682700288056331364787171045819973654991149949197959929860861228180021707316851924456205543665565810892674190059831330231436970914474774562714945620519144389785158908994181951348846017432506464163564960993784254153395406799101314760033445065193429592512349952020982932218524462341002102063435489318813316464511621736943938440710470694912336237680219746204595128959161800595216366237538296447335375818871952520026993102148328897083547184286493241191505953601668858941129790966909236941127851370202421135897091086763569884760099112291072056970636380417349019579768748054760104838790424708988260443926906673795975104689`
+
+![alt text](image-4.png)
+
+
+
+## **17. CERTainly not**
+![alt text](image-7-1.png)
+### 1. Given
+Một file chứng chỉ số RSA định dạng **DER** (`2048b-rsa-example-cert.der`)[cite: 2].
+Định dạng DER là một phương pháp mã hóa nhị phân cho các cấu trúc dữ liệu ASN.1, thường được sử dụng trong các tiện ích của Windows hoặc các hệ thống nhúng[cite: 4].
+Khác với định dạng PEM (thường thấy dưới dạng Base64 và có tiêu đề `-----BEGIN CERTIFICATE-----`), file DER chứa dữ liệu nhị phân thô không thể đọc trực tiếp bằng mắt thường[cite: 4].
+
+### 2. Goal
+Trích xuất giá trị **Modulus ($n$)** từ chứng chỉ X.509 này và đưa ra câu trả lời dưới dạng số nguyên thập phân[cite: 4].
+
+### 3. Solution
+
+#### **Phân tích kỹ thuật**
+[cite_start]Chứng chỉ X.509 chứa nhiều thông tin như nhà phát hành (Issuer), thời hạn (Validity) và quan trọng nhất là **Public Key** của thực thể được cấp chứng chỉ[cite: 3, 4]. Vì đây là chứng chỉ RSA, Public Key sẽ bao gồm Modulus ($n$) và Public Exponent ($e$).
+
+#### Các bước thực hiện
+**Đọc file nhị phân:** Sử dụng Python mở file `.der` ở chế độ `rb` (read binary) để lấy toàn bộ dữ liệu thô[cite: 4].
+**Import chứng chỉ:** Sử dụng thư viện mật mã (như `PyCryptodome`) thông qua hàm `RSA.importKey()`. [cite_start]Thư viện này đủ thông minh để tự động phân tích cấu trúc ASN.1 phức tạp bên trong chứng chỉ để tách lấy thành phần khóa công khai[cite: 4].
+**Lấy giá trị $n$:** Truy xuất thuộc tính `.n` của đối tượng khóa đã import để lấy Modulus[cite: 4].
+
+#### Mã khai thác (Python)
+```python
+from Crypto.PublicKey import RSA
+
+# Đọc dữ liệu nhị phân từ file DER
+with open("2048b-rsa-example-cert.der", "rb") as f:
+    der_data = f.read()
+
+# Phân tích chứng chỉ để trích xuất Public Key
+key = RSA.importKey(der_data)
+
+# Xuất Modulus ở dạng thập phân
+print(key.n)
+```
+[cite_start][cite: 4]
 
 ---
+### Kết quả:
+`22825373692019530804306212864609512775374171823993708516509897631547513634635856375624003737068034549047677999310941837454378829351398302382629658264078775456838626207507725494030600516872852306191255492926495965536379271875310457319107936020730050476235278671528265817571433919561175665096171189758406136453987966255236963782666066962654678464950075923060327358691356632908606498231755963567382339010985222623205586923466405809217426670333410014429905146941652293366212903733630083016398810887356019977409467374742266276267137547021576874204809506045914964491063393800499167416471949021995447722415959979785959569497`
+
+
+![alt text](image-8.png)
+
+
+## **18. SSH Keys**
+![alt text](image-12-1.png)
+![alt text](image-13-1.png)
+### **1. Phân tích (Given)**
+* **Dữ liệu:** Một file `bruce_rsa.pub` chứa khóa công khai SSH.
+* **Định dạng:** Khóa SSH công khai có cấu trúc khác với file PEM truyền thống. Nó bắt đầu bằng loại thuật toán (`ssh-rsa`), theo sau là một chuỗi Base64 và cuối cùng là comment (email/tên máy).
+* **Cấu trúc bên trong:** Chuỗi Base46 đó thực chất là các giá trị được mã hóa theo định dạng nhị phân của SSH, bao gồm:
+    * Độ dài chuỗi "ssh-rsa" + chuỗi "ssh-rsa"
+    * Độ dài số mũ $e$ + giá trị $e$
+    * Độ dài Modulus $N$ + giá trị $N$
+
+### 2. Goal
+* Trích xuất giá trị Modulus $N$ từ file khóa này và chuyển nó sang dạng số nguyên thập phân (decimal integer).
+
+### 3. Solution
+
+1. Đọc nội dung file `.pub`.
+2. Sử dụng `RSA.importKey()` để parse dữ liệu.
+3. Truy cập thuộc tính `.n` của đối tượng khóa để lấy Modulus.
+
+```python
+import os
+from Crypto.PublicKey import RSA
+
+# Lấy đường dẫn thư mục của chính file script này
+dir_path = os.path.dirname(os.path.realpath(__file__))
+file_name = "bruce_rsa_6e7ecd53b443a97013397b1a1ea30e14.pub"
+full_path = os.path.join(dir_path, file_name)
+
+with open(full_path, "r") as f:
+    key = RSA.importKey(f.read())
+
+print("Flag của bạn đây:")
+print(key.n)
+```
+
+### 4. Kết quả
+`3931406272922523448436194599820093016241472658151801552845094518579507815990600459669259603645261532927611152984942840889898756532060894857045175300145765800633499005451738872081381267004069865557395638550041114206143085403607234109293286336393552756893984605214352988705258638979454736514997314223669075900783806715398880310695945945147755132919037973889075191785977797861557228678159538882153544717797100401096435062359474129755625453831882490603560134477043235433202708948615234536984715872113343812760102812323180391544496030163653046931414723851374554873036582282389904838597668286543337426581680817796038711228401443244655162199302352017964997866677317161014083116730535875521286631858102768961098851209400973899393964931605067856005410998631842673030901078008408649613538143799959803685041566964514489809211962984534322348394428010908984318940411698961150731204316670646676976361958828528229837610795843145048243492909`
+
