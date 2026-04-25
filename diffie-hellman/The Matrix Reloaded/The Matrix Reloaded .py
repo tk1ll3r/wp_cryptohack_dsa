@@ -1,40 +1,52 @@
-import json
-import hashlib
 from Crypto.Cipher import AES
-from Crypto.Util.Padding import unpad
+from Crypto.Hash import SHA256
+from Crypto.Util.number import *
+from Crypto.Util.Padding import pad, unpad
 
-# Thông số hệ thống
-P = 13322168333598193507807385110954579994440518298037390249219367653433362879385570348589112466639563190026187881314341273227495066439490025867330585397455471
+import json
 
-def solve():
-    print("[-] Đang đọc file flag.enc...")
-    try:
-        with open("flag.enc", "r") as f:
-            data = json.load(f)
-            iv = bytes.fromhex(data['iv'])
-            ciphertext = bytes.fromhex(data['ciphertext'])
-    except Exception as e:
-        print(f"[!] Lỗi đọc file: {e}")
-        return
+p = 13322168333598193507807385110954579994440518298037390249219367653433362879385570348589112466639563190026187881314341273227495066439490025867330585397455471
+N = 30
 
-    # SECRET ĐÚNG trích xuất từ Matrix DLP của bạn:
-    # Sau khi giải lambda^x = target (mod P)
-    SECRET = 10645601267882200251106606020521503814890665595907406184910906232750661148816782298715886982974917454316065471412093863778550275814120967000305886470366627
+def load_matrix(fname):
+    data = open(fname, 'r').read().strip()
+    rows = [list(map(int, row.split(' '))) for row in data.splitlines()]
+    return Matrix(GF(p), rows)
 
-    print(f"[+] SECRET tìm được: {SECRET}")
-    print("[-] Đang giải mã Flag...")
+G = load_matrix("/home/sage/chal/generator.txt")
+output = json.loads(open("/home/sage/chal/output.txt").read())
 
-    # Tạo Key theo đúng matrix_reloaded.sage: SHA256(str(SECRET))[:16]
-    key = hashlib.sha256(str(SECRET).encode()).digest()[:16]
-    
-    cipher = AES.new(key, AES.MODE_CBC, iv)
-    try:
-        decrypted = unpad(cipher.decrypt(ciphertext), 16)
-        print("\n" + "="*40)
-        print(f"FLAG: {decrypted.decode()}")
-        print("="*40)
-    except Exception as e:
-        print(f"[!] Giải mã thất bại: {e}. Kiểm tra lại SECRET.")
+v = Matrix(GF(p), output['v'])
+w = Matrix(GF(p), output['w']) # w = G^k v
 
-if __name__ == "__main__":
-    solve()
+J, P = G.jordan_form(transformation=True) # G = P J P^-1
+
+# => w = P J^k P^-1 v
+# => P^-1 w = J^k (P^-1 v)
+# let w_ = LHS, v_ = P^-1 v
+
+w_ = (P^(-1)) * (w.T)
+v_ = (P^(-1)) * (v.T)
+
+# Note that the lower 2x2 block of J is of the form [[n,1],[0,n]] and that
+# [[n,1],[0,n]]^k = n^(k-1) [[n,k],[0,n]]
+
+# let w_ = [...,w1, w2], v_ = [...,v1,v2]
+# letting [w1, w2] = [[n,1],[0,n]]^k [v1, v2] and solving the resulting system of equations
+# we get that k = n/w2 (w1 - w2*v1/v2)
+M = J[-2:,-2:]
+n = M[0,0]
+v1, v2 = list(v_.T)[0][-2:]
+w1, w2 = list(w_.T)[0][-2:]
+
+SECRET = int(n/w2 * (w1 - w2*v1/v2))
+
+# Decrypt the flag
+
+KEY_LENGTH = 128
+KEY = SHA256.new(data=str(SECRET).encode()).digest()[:KEY_LENGTH]
+
+flag_enc = json.loads(open("/home/sage/chal/flag.enc", "r").read())
+cipher = AES.new(KEY, AES.MODE_CBC, iv=bytes.fromhex(flag_enc["iv"]))
+
+print(cipher.decrypt(bytes.fromhex(flag_enc["ciphertext"])))
