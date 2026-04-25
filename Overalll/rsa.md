@@ -1,14 +1,15 @@
-# 1. Modular_Exponentiation
-## Given
+# RSA
+## 1. Modular_Exponentiation
+### Given
 - Challenge giới thiệu về **modular exponentiation** — phép tính nền tảng của RSA:
     $$base^{exponent} \pmod {modulus}$$
 
 - Ví dụ: $2^{10} \pmod{17} = 1024 \pmod{17} = 4$
 
-## Goal
+### Goal
 - Tính kết quả của $101^{17} \pmod{22663}$
 
-## Solution
+### Solution
 - Dùng hàm `pow()` built-in của Python.
 
     Nhận 3 tham số `pow(base, exponent, modulus)` và tính modular exponentiation hiệu quả bằng thuật toán **fast exponentiation (square-and-multiply)** thay vì tính $101^{17}$ rồi mới mod (số sẽ rất lớn):
@@ -25,8 +26,8 @@
    <img width="60" height="25" alt="image" src="https://github.com/user-attachments/assets/e041b011-2303-4f55-b084-892fbf8ba39f" />
 
    ---
-# 2. Public_Keys
-  ## Given
+## 2. Public_Keys
+  ### Given
 - RSA encryption hoạt động như sau:
 
     $$C = M^e \pmod N \quad \text{với} \quad N = p \cdot q$$
@@ -45,10 +46,10 @@
     > 
     > Việc tính $d$ từ $N$ mà không biết $p, q$ chính là bài toán **phân tích thừa số nguyên (integer factorization)** — một bài toán cực khó giúp tạo nên sự bảo mật của RSA.
 
-## Goal
+### Goal
 - Tính $12^{65537} \pmod {(17×23)}$
 
-## Solution
+### Solution
 - **Bước 1 - Tính modulus:**
 
     $$N = p × q$$
@@ -85,8 +86,8 @@
     > Trong thực tế, RSA thường sử dụng $N$ có kích thước **2048-bit** hoặc **4096-bit** để việc phân tích thừa số trở nên bất khả thi đối với cả những siêu máy tính mạnh nhất hiện nay.
 
 ---
-# 3. Euler's_Totient
-## Given
+## 3. Euler's_Totient
+### Given
 - Cho hai số nguyên tố:
 
     $$p = 857504083339712752489993810777$$
@@ -105,10 +106,10 @@
     > 
     > $$\phi(N) = N - (q + p - 1) = (p - 1)(q - 1)$$
 
-## Goal
+### Goal
 - Tính $ϕ(N)=(p−1)(q−1)$
 
-## Solution
+### Solution
 - **Code Python:**
     ```python
     p = 857504083339712752489993810777
@@ -129,8 +130,8 @@
    <img width="555" height="28" alt="image" src="https://github.com/user-attachments/assets/d318f059-0941-481a-8ac6-a38912a2a4b9" />
 
    ---
-# 4. Private_Keys
-  ## Given
+## 4. Private_Keys
+  ### Given
 - Cho hai số nguyên tố và exponent public:
     $$p = 857504083339712752489993810777$$
     $$q = 1029224947942998075080348647219$$
@@ -144,10 +145,10 @@
 
     > **Modular Multiplicative Inverse:** $d$ là số mà khi nhân với $e$ cho ra phần dư $1$ khi chia cho $\phi(N)$. Giá trị $d$ tồn tại khi và chỉ khi $\gcd(e, \phi(N)) = 1$. Trong giao thức RSA, điều này luôn được đảm bảo vì $e$ được chọn sao cho nguyên tố cùng nhau với $\phi(N)$. Ta có thể tìm $d$ hiệu quả bằng cách sử dụng **Thuật toán Euclid mở rộng (Extended Euclidean Algorithm**).
 
-## Goal
+### Goal
 - Tính $d \equiv e^{-1} \pmod{\phi(N)}$
 
-## Solution
+### Solution
 - **Bước 1 - Tính $\phi(N) = (p-1)(q-1)$:**
 
     ```python
@@ -174,8 +175,8 @@
 
 ---
 
-# 5. RSA Decryption
-## Given
+## 5. RSA Decryption
+### Given
 - Các tham số RSA:
     - $N = 882564595536224140639625987659416029426239230804614613279163$
 
@@ -186,11 +187,11 @@
 - Private key $d$ đã tính ở challenge trước:
     $$d = 121832886702415731577073962957377780195510499965398469843281$$
 
-## Goal
+### Goal
 - Giải mã ciphertext $c$ bằng private key $d$ theo công thức RSA decrypt:
     $$M = c^d \pmod N$$
 
-## Solution
+### Solution
 - Vì RSA decrypt là phép tính đối xứng với encrypt nên thay vì dùng $e$, ta dùng $d$:
 
     $$ \text{Encrypt: } C = M^e \pmod N $$
@@ -224,8 +225,8 @@
   <img width="93" height="27" alt="image" src="https://github.com/user-attachments/assets/b3237cf3-6588-40b9-9cd9-3ed17222aa09" />
 
   ---
-# 6. RSA Signatures
- ## Given
+## 6. RSA Signatures
+ ### Given
 - Challenge cung cấp file `private.key` chứa RSA private key, và yêu cầu *ký số* (digital signature) lên `message = "crypto{Immut4ble_m3ssag1ng}"`.
 
 - Công thức ký số RSA:
@@ -239,14 +240,14 @@
 
     > **Digital Signature:** Thay vì encrypt bằng public key của người nhận, ta "encrypt" hash của message bằng private key của chính mình. Bất kỳ ai có public key của ta đều có thể verify bằng cách decrypt chữ ký và so sánh với hash của message. Nếu khớp -> message chưa bị chỉnh sửa và chắc chắn do ta gửi.
 
-## Goal
+### Goal
 - Đọc private key từ file `private.key`
 
 - Tính SHA256 hash của message, chuyển sang số nguyên
 
 - Ký số: $S=H(m)^d \pmod N$
 
-## Solution
+### Solution
 - **Bước 1 — Đọc private key từ file:**
 
     File `private.key` ở challenge này không phải PEM chuẩn mà là định dạng text thuần túy dạng `tên = giá trị` nên ta parse thủ công từng dòng:
@@ -298,18 +299,18 @@
     > **Tại sao ký lên hash thay vì ký trực tiếp lên message?** Vì $m$ có thể dài tùy ý, trong khi RSA chỉ hoạt động trên số nguyên nhỏ hơn $N$. SHA256 luôn cho ra output 256-bit cố định, phù hợp để đưa vào phép tính RSA. Ngoài ra, hash còn đảm bảo tính **collision resistance** — kẻ tấn công không thể tạo message khác có cùng hash.
 
 ---
-# 7. Factoring
+## 7. Factoring
 
-## Given
+### Given
 - Hệ mật mã RSA hoạt động dựa trên một module $N$ được tạo ra bằng cách nhân hai số nguyên tố bí mật $p$ và $q$ ($N = p \cdot q$). Tính bảo mật của RSA phụ thuộc hoàn toàn vào việc máy tính rất khó để phân tích $N$ ngược lại thành $p$ và $q$ nếu module đó đủ lớn.
 - Hệ thống cung cấp một module $N$ có kích thước khá nhỏ (150-bit):
 $N = 510143758735509025530880200653196460532653147$
 
-## Goal
+### Goal
 
 Phân tích module $N$ thành hai thừa số nguyên tố $p$ và $q$. Cờ (Flag) chính là số nguyên tố có giá trị nhỏ hơn.
 
-## Solution
+### Solution
 
 Sử dụng các công cụ trực tuyến để phân tích, ở bài này mình sử dụng `FactorDB.com` để tìm ra được só o nguyên tố.
 <img width="1889" height="460" alt="image" src="https://github.com/user-attachments/assets/05e0e94c-6c85-414e-a818-ac1a606ab340" />
@@ -318,17 +319,17 @@ Sử dụng các công cụ trực tuyến để phân tích, ở bài này mìn
 `19704762736204164635843`
  
 ---
-# 8. Inferius Prime
+## 8. Inferius Prime
 
-## Given
+### Given
 - Cơ sở: Độ an toàn của hệ mật mã công khai RSA phụ thuộc hoàn toàn vào độ phức tạp tính toán của bài toán phân tích nhân tử số nguyên lớn (Integer Factorization Problem - IFP). Theo các tiêu chuẩn an toàn thông tin hiện hành, module $N$ đòi hỏi kích thước tối thiểu từ 2048-bit để chống lại các kỹ thuật phân tích hiện đại.
 - Hệ thống cung cấp cấu hình khóa công khai bao gồm số mũ $e = 65537$, bản mã $ct$ và module $N$. Phân tích thực nghiệm cho thấy module $N$ chỉ sở hữu xấp xỉ 60 chữ số thập phân (tương đương với không gian khoảng 200-bit). Sự sai lệch tham số này là một điểm yếu nghiêm trọng trong khâu khởi tạo, làm suy giảm hoàn toàn tính an toàn của hệ mật mã.
 
-## Goal
+### Goal
 
 Phân tích module $N$ thành 2 số nguyên tố $p$ và $q$. Sau đó, sử dụng $p$ và $q$ để tính khóa bí mật $d$ và giải mã ciphertext $ct$ về dạng văn bản (Flag).
 
-## Solution
+### Solution
 
 1. Sử dụng `FactorDB.com` phân tích thành 2 số p và q.
 2. Tính số Euler Totient: $\phi = (p-1) \cdot (q-1)$.
@@ -359,18 +360,18 @@ print(long_to_bytes(decrypt))
 `b'crypto{N33d_b1g_pR1m35}'`
 
 --- 
-# 9. Monoprime
+## 9. Monoprime
 
-## Given
+### Given
 
 - Trong hệ mật mã RSA tiêu chuẩn, module $N$ được thiết lập từ tích của hai số nguyên tố phân biệt ($N = p \cdot q$). Dựa trên đặc tính này, phi hàm Euler (Euler's Totient function) được tính bằng công thức $\phi(N) = (p-1)(q-1)$.
 - Tuy nhiên, hệ thống "Monoprime" này mắc một lỗi thiết kế kiến trúc cơ bản: module $N$ được cấu tạo từ một số nguyên tố duy nhất ($N = p$). Sự biến đổi này phá vỡ hoàn toàn bài toán phân tích nhân tử, vốn là nền tảng bảo mật của RSA.
 - Bài toán cung cấp bộ tham số khóa công khai gồm số mũ $e = 65537$, bản mã $ct$ và một module $N$ siêu lớn nhưng bản thân nó đã là một số nguyên tố.
-## Goal
+### Goal
 
 - Khai thác lỗ hổng cấu trúc của module $N$ để tính toán trực tiếp phi hàm Euler $\phi(N)$, qua đó suy xuất khóa giải mã bí mật $d$ và khôi phục bản mã $ct$ về định dạng văn bản (Flag).
 
-## Solution
+### Solution
 
 - Khi module $N$ là một số nguyên tố, ta không cần phải dùng bất kỳ công cụ nào để phân tích (factorize) nó nữa. 
 - Dựa theo định nghĩa toán học của phi hàm Euler, số lượng các số nguyên tố cùng nhau với một số nguyên tố $N$ chính là $N - 1$.Do đó, công thức tính $\phi$ được đơn giản hóa tối đa:$$\phi(N) = N - 1$$
@@ -394,21 +395,21 @@ print(long_to_bytes(decrypt))
 `b'crypto{0n3_pr1m3_41n7_pr1m3_l0l}'`
 
 --- 
-# 10. Square Eyes
+## 10. Square Eyes
 
-## Given
+### Given
 - Trong quá trình sinh khóa RSA tiêu chuẩn, module $N$ bắt buộc phải là tích của hai số nguyên tố phân biệt ($N = p \cdot q$). 
 - Dựa trên định lý cơ bản của số học, phi hàm Euler cho cấu trúc này là $\phi(N) = (p-1)(q-1)$. 
 - Tuy nhiên, ở bài toán này, kiến trúc hệ thống đã bị thay đổi: module $N$ được thiết lập bằng bình phương của một số nguyên tố duy nhất ($N = p^2$). Khi cấu trúc vi phạm quy tắc này, công thức tính phi hàm Euler thay đổi. 
 - Theo định lý toán học đối với lũy thừa của một số nguyên tố $p^k$, ta có $\phi(p^k) = p^k - p^{k-1}$. Do đó, với $k=2$, phi hàm được xác định bằng: $\phi(N) = p^2 - p = p(p-1)$.
 - Hệ thống cung cấp bản mã $ct$, số mũ $e = 65537$ và một module $N$ khổng lồ (khoảng 4096-bit). Tác giả xác nhận rằng $N$ được tạo ra bằng cách lấy một số nguyên tố 2048-bit và "nhân nó với chính nó" (dùng hai lần).
 
-## Goal
+### Goal
 
 - Khai thác điểm yếu cấu trúc của module $N = p^2$ bằng thuật toán khai căn bậc hai số nguyên (Integer Square Root) để tìm lại tham số $p$. 
 - Sau đó, áp dụng đúng định lý phi hàm Euler cho lũy thừa số nguyên tố để tính toán khóa giải mã $d$ và khôi phục văn bản gốc.
 
-## Solution
+### Solution
 
 - Dựa trên gợi ý của đề bài về phi hàm Euler, ta xác định được module $N$ là một số chính phương ($N = p^2$, đồng nghĩa $p = q$). 
 - Do đó, ta có thể dễ dàng tìm $p$ bằng phép khai căn bậc hai ($p = \sqrt{N}$) và tính phi hàm theo công thức: $\phi(N) = p \cdot (p-1)$.
@@ -433,51 +434,51 @@ print(long_to_bytes(decrypt))
 `b'crypto{squar3_r00t_i5_f4st3r_th4n_f4ct0r1ng!}`
 
 ---
-# 11. ManyPrime
+## 11. ManyPrime
 
-## Given
+### Given
 Bài toán cung cấp ba giá trị `n`, `e` và `ct` trong một hệ thống RSA, trong đó `n` là tích của nhiều số nguyên tố nhỏ.
 
-### Tham số
+#### Tham số
 - **n**: Một số lớn là tích của nhiều số nguyên tố.
 - **e**: Số mũ công khai (`e = 65537`).
 - **ct**: Dữ liệu mã hóa (ciphertext) cần giải mã.
 
-## Goal
+### Goal
 Bài toán này dựa trên **RSA đa nguyên tố** (multi-prime RSA), trong đó `n` không phải là tích của chỉ hai số nguyên tố (như trong RSA chuẩn), mà là tích của nhiều số nguyên tố nhỏ. Với bài toán như vậy, **Phương pháp Eliptic Curve (ECM)** là một kỹ thuật hữu ích để phân tích số liệu.
 
-## Solution
+### Solution
 
-### 1. Phân tích số `n`
+#### 1. Phân tích số `n`
 Vì `n` là tích của nhiều số nguyên tố, chúng ta sử dụng **Phương pháp ECM** để phân tích `n`. Mục tiêu là tìm ra các yếu tố nguyên tố `p1, p2, ..., pk` sao cho:
 \[
 n = p1 \times p2 \times \cdots \times pk
 \]
 
-### 2. Tính hàm Euler `φ(n)`
+#### 2. Tính hàm Euler `φ(n)`
 Khi đã có được các yếu tố nguyên tố, ta có thể tính hàm Euler `φ(n)`:
 \[
 φ(n) = (p1 - 1)(p2 - 1) \cdots (pk - 1)
 \]
 Điều này là rất quan trọng để xác định khóa giải mã.
 
-### 3. Tính toán chỉ số riêng tư `d`
+#### 3. Tính toán chỉ số riêng tư `d`
 Chỉ số riêng tư `d` là nghịch đảo modular của `e` theo `φ(n)`:
 \[
 d = e^{-1} \pmod{φ(n)}
 \]
 
-### 4. Giải mã dữ liệu
+#### 4. Giải mã dữ liệu
 Sử dụng chỉ số riêng tư `d`, ta có thể giải mã dữ liệu `ct`:
 \[
 m = ct^d \bmod n
 \]
 Trong đó `m` là thông điệp đã giải mã.
 
-### 5. Chuyển đổi thông điệp sang định dạng có thể đọc được
+#### 5. Chuyển đổi thông điệp sang định dạng có thể đọc được
 Thông điệp `m` là một số, chúng ta có thể chuyển đổi số này thành chuỗi byte để lấy được flag.
 
-## Giải pháp bằng Python
+### Giải pháp bằng Python
 ```python
 from Crypto.Util.number import long_to_bytes
 
@@ -499,38 +500,38 @@ print(long_to_bytes(m))
 Flag: `crypto{700_m4ny_5m4ll_f4c70r5}`
 
 ---
-# 12. Salty
+## 12. Salty
 
-## Given
+### Given
 Bài toán yêu cầu giải mã dữ liệu RSA với các tham số `n`, `e`, và `ct` trong đó `n` là tích của nhiều số nguyên tố nhỏ.
 
-### Tham số
+#### Tham số
 - **n**: Một số nguyên lớn là tích của nhiều số nguyên tố.
 - **e**: Mũ công khai (`e = 1`).
 - **ct**: Dữ liệu mã hóa (ciphertext) cần giải mã.
 
-## Goal
+### Goal
 - Vì `e = 1`, quá trình mã hóa và giải mã không thay đổi dữ liệu, tức là `ct` chính là `pt` (plaintext).
 - Do đó, `ct` chính là dữ liệu gốc, và không cần phải giải mã.
 
-## Solution
+### Solution
 
-### 1. Phân tích `n`
+#### 1. Phân tích `n`
 - `n` là tích của hai số nguyên tố `p` và `q`, nhưng vì `e = 1`, việc phân tích này không quan trọng với bài toán này.
 
-### 2. Tính hàm Euler `φ(n)`
+#### 2. Tính hàm Euler `φ(n)`
 - Vì `e = 1`, chúng ta không cần phải tính hàm Euler `φ(n)` để giải quyết bài toán này.
 
-### 3. Tính toán chỉ số riêng tư `d`
+#### 3. Tính toán chỉ số riêng tư `d`
 - Chỉ số riêng tư `d` là nghịch đảo của `e` theo `φ(n)`, nhưng vì `e = 1`, chúng ta có `d = 1`, và không cần tính toán thêm.
 
-### 4. Giải mã
+#### 4. Giải mã
 - Dữ liệu mã hóa (`ct`) chính là dữ liệu gốc (`pt`), vì vậy chúng ta không cần giải mã.
 
-### 5. Chuyển đổi `ct` thành định dạng có thể đọc được
+#### 5. Chuyển đổi `ct` thành định dạng có thể đọc được
 - Chúng ta chỉ cần chuyển đổi `ct` (là `pt`) từ dạng số nguyên sang dạng byte để lấy được flag.
 
-## Code tìm FLAG
+### Code tìm FLAG
 ```python
 from Crypto.Util.number import long_to_bytes
 
@@ -545,27 +546,27 @@ print(flag)
 <img width="1482" height="385" alt="image" src="https://github.com/user-attachments/assets/6f4d9816-8a41-4d8e-b84d-d7f7fcdd0c75" />
 
 ---
-# 13. Modulus Inutilis
+## 13. Modulus Inutilis
 
-## Given
+### Given
 - **Khóa công khai**: \( e = 3 \)
 - **Ciphertext**: \( ct \)
 - **Modulus**: \( n \)
 - **Flag cần giải mã**: \( \text{FLAG} = b"crypto{???????????????????????????"} \)
 
-### Mô tả về mã hóa RSA:
+#### Mô tả về mã hóa RSA:
 Trong hệ thống RSA, ciphertext \( ct \) được tính từ plaintext \( pt \) theo công thức:
 \[
 ct = pt^e \mod n
 \]
 Do đó, để giải mã được thông điệp, chúng ta cần tính toán giá trị \( pt \) từ \( ct \).
 
-## Goal
+### Goal
 - Mục tiêu là giải mã ciphertext \( ct \) và khôi phục lại giá trị của flag \( pt \).
 
-## Solution
+### Solution
 
-### Các bước thực hiện:
+#### Các bước thực hiện:
 
 1. **Phân tích \( N \)**:
    - Chúng ta cần phân tích modulus \( n \) thành hai yếu tố nguyên tố \( p \) và \( q \) để tính \( phi(N) = (p-1)(q-1) \).
@@ -588,7 +589,7 @@ Do đó, để giải mã được thông điệp, chúng ta cần tính toán g
 5. **Chuyển đổi số nguyên thành flag**:
    - Cuối cùng, sau khi khôi phục được giá trị \( m \), chúng ta sẽ chuyển đổi \( m \) thành chuỗi bytes và in ra flag.
 
-### Code tìm FLAG
+#### Code tìm FLAG
 ```python
 from Crypto.Util.number import inverse, bytes_to_long, long_to_bytes
 from sympy import factorint, cbrt
@@ -619,16 +620,16 @@ print(f"Flag: {flag.decode()}")
 <img width="1523" height="364" alt="image" src="https://github.com/user-attachments/assets/82bc956c-c115-4b1f-8e4e-bafeeb1934c6" />
 
 ---
-# 14. Everything is Big
+## 14. Everything is Big
 
 <img width="2176" height="434" alt="image" src="https://github.com/user-attachments/assets/5e4c4783-4b6a-47f8-a1b0-3933dbb41fc9" />
 
-### **1. Given**
+#### **1. Given**
 * [cite_start]Một hệ thống mã hóa RSA với các tham số $N$, $e$, và ciphertext $c$ có kích thước rất lớn (khoảng 2048 bits)[cite: 8].
 * [cite_start]File `Everything is Big.py` cho thấy số mũ công khai $e$ cũng rất lớn, gần tương đương với kích thước của $N$[cite: 8].
 * [cite_start]Thông thường trong RSA, người ta chọn $e$ nhỏ (như 65537) để tối ưu tốc độ mã hóa, nhưng ở đây $e$ được chọn "massive" (khổng lồ)[cite: 8].
 
-### **2. Goal**
+#### **2. Goal**
 * Khai thác việc sử dụng số mũ công khai $e$ quá lớn để tìm ra số mũ bí mật $d$ và giải mã Flag.
 
 ### **3. Solution**
@@ -687,7 +688,7 @@ print(wiener_attack(e, N))
 `crypto{s0m3th1ng5_c4n_b3_t00_b1g}`
 
 ---
-# 15. Crossed Wires
+## 15. Crossed Wires
 ### **1. Given**
 * Một file `source.py` mô tả quy trình mã hóa: Flag được mã hóa liên tiếp qua nhiều người bạn, mỗi người sử dụng một số mũ công khai $e_i$ khác nhau nhưng dùng chung một Modulus $N$.
 * File `output.txt` cung cấp:
@@ -762,7 +763,7 @@ print(f"Flag: {long_to_bytes(flag_int).decode()}")
 <img width="976" height="96" alt="image" src="https://github.com/user-attachments/assets/7a347808-88b7-4f89-8f4e-df1b56d3419d" />
 
 ---
-# 16. Everything is Still Big
+## 16. Everything is Still Big
 ### **1. Given**
 Một hệ thống mã hóa RSA với Modulus $N$, số mũ công khai $e$ và Ciphertext $ct$ đều là các số cực kỳ lớn (2048-bit)[cite: 11].
 Tên bài toán ám chỉ đây là phiên bản nâng cấp của "Everything is Big". [cite_start]Tuy nhiên, các giá trị $e$ và $d$ (số mũ bí mật) đã được điều chỉnh để tránh cuộc tấn công Wiener cơ bản[cite: 11].
@@ -808,7 +809,7 @@ print(f"Flag: {long_to_bytes(m).decode()}")
 `crypto{bon3h5_4tt4ck_i5_sr0ng3r_th4n_w13n3r5}`
 
 ---
-# 17. Endless Emails
+## 17. Endless Emails
 ### **1. Given**
 * Một danh sách nhiều cặp Modulus $n_i$ và Ciphertext $c_i$ tương ứng.
 * Tất cả các tin nhắn đều sử dụng cùng một số mũ công khai nhỏ: $e = 3$.
@@ -857,7 +858,7 @@ for i, j, k in combinations(range(7), 3):
 
 ---
 
-# 18. Infinite Descent
+## 18. Infinite Descent
 ### **1. Given**
 * Một file `descent.py` mô tả cách sinh các số nguyên tố $p$ và $q$ cho hệ thống RSA.
 * Điểm đặc biệt: Để "tối ưu hóa" tốc độ, người tạo đã chọn $p$ và $q$ cực kỳ gần nhau (khoảng cách giữa chúng rất nhỏ).
@@ -966,7 +967,7 @@ if __name__ == '__main__':
 
 ---
 
-# 19.Marin's Secrets
+## 19.Marin's Secrets
 ### **1. Given**
 * File `marin.py` mô tả cách sinh hai số nguyên tố $p$ và $q$ từ một danh sách bí mật.
 * Hàm `get_prime(secret)` thực hiện phép tính: `(1 << secret) - 1`. Đây chính là công thức của **Số nguyên tố Mersenne**: $M_n = 2^n - 1$.
@@ -1001,7 +1002,7 @@ Thay vì dùng các thuật toán phân tích thừa số vạn năng như GNFS,
 <img width="2068" height="78" alt="image" src="https://github.com/user-attachments/assets/16aa7525-dcba-4ab1-9932-44b70df62461" />
 
 ---
-# 20. Fast Primes
+## 20. Fast Primes
 ### **1. Given**
 * Một hệ thống sinh khóa RSA được quảng cáo là "siêu nhanh" so với cách truyền thống.
 * File `key.pem` chứa khóa công khai (Public Key).
@@ -1067,7 +1068,7 @@ except ValueError as e:
 
 ---
 
-# 21. Ron was Wrong, Whit is Right
+## 21. Ron was Wrong, Whit is Right
 ### **1. Phân tích (Given)**
 * **Dữ liệu:** Một file zip chứa 50 cặp file (khóa công khai `.pem` và bản mã `.ciphertext`).
 * **Giao thức:** Sử dụng RSA với chuẩn mã hóa PKCS#1 OAEP.
@@ -1168,9 +1169,9 @@ if __name__ == "__main__":
 
 ---
 
-# 22. RSA Backdoor Viability
+## 22. RSA Backdoor Viability
 
-## Given
+### Given
 Bài này cho file sinh khóa `complex_primes.py` và file `output.txt` chứa `n`, `e`, `c`.
 
 Từ source code, ta có:
@@ -1204,7 +1205,7 @@ hay tương đương:
 
 ---
 
-## Ý tưởng giải
+### Ý tưởng giải
 
 RSA bình thường an toàn vì rất khó factor:
 
@@ -1240,7 +1241,7 @@ Vì vậy hướng giải là:
 
 ---
 
-## Sau khi factor `n`
+### Sau khi factor `n`
 
 Thu được:
 
@@ -1252,7 +1253,7 @@ q = 3485742316212179160423547089847176156611515908458526958600782255945877471627
 
 ---
 
-## Code giải
+### Code giải
 
 ```python
 from Crypto.Util.number import inverse, long_to_bytes
@@ -1273,7 +1274,7 @@ print(long_to_bytes(m))
 
 ---
 
-## Kết quả
+### Kết quả
 
 Chạy đoạn code trên thu được:
 
@@ -1291,18 +1292,18 @@ crypto{I_want_to_Break_Square-free_4p-1}
 <img width="503" height="106" alt="image" src="https://github.com/user-attachments/assets/85f60a63-66a0-4136-965a-699ceb53fa93" />
 
 ---
-# 23. Bespoke Padding
+## 23. Bespoke Padding
 
-## Given
+### Given
 Bài toán yêu cầu giải mã một thông điệp RSA có sử dụng padding tùy chỉnh. Mỗi lần mã hóa, flag được mã hóa với một padding khác nhau.
 
-### Tham số
+#### Tham số
 - **p, q**: Hai số nguyên tố 1024 bit được sử dụng để tạo ra modulus `N`.
 - **N**: Là tích của hai số nguyên tố `p` và `q`, tức là `N = p * q`.
 - **e**: Số mũ công khai (`e = 11`).
 - **FLAG**: Cờ mà bạn cần giải mã, có định dạng `crypto{???????????????????????????}`.
   
-## Goal
+### Goal
 Mỗi lần bạn yêu cầu mã hóa flag, một padding ngẫu nhiên được áp dụng vào thông điệp. Padding này được tạo ra từ hai số nguyên ngẫu nhiên `a` và `b`, và thông điệp sẽ được mã hóa theo phương thức:
 
 \[
@@ -1318,13 +1319,13 @@ Sau đó, thông điệp đã padding được mã hóa theo công thức:
 text{encrypted} = text{pow}(text{pad\_msg}, e, N)
 \]
 
-## Solution
+### Solution
 
 1. **Tạo khóa RSA**: Khóa RSA được tạo từ hai số nguyên tố `p` và `q`.
 2. **Áp dụng padding**: Mỗi lần mã hóa, padding ngẫu nhiên được áp dụng vào flag. Điều này có nghĩa là flag mã hóa mỗi lần sẽ khác nhau.
 3. **Giải mã thông điệp**: Vì padding được tạo ra ngẫu nhiên, bạn cần tìm cách khôi phục thông điệp ban đầu từ dữ liệu đã mã hóa.
 
-### Phân tích và tấn công
+#### Phân tích và tấn công
 Dữ liệu nhận được bao gồm:
 - `encrypted_flag`: Dữ liệu đã được mã hóa.
 - `modulus`: Giá trị `N`.
@@ -1332,7 +1333,7 @@ Dữ liệu nhận được bao gồm:
 
 Mục tiêu là sử dụng các giá trị này để khôi phục được thông điệp ban đầu (flag).
 
-## COde tìm FLAG
+### COde tìm FLAG
 ```python
 import socket
 import json
@@ -1403,23 +1404,23 @@ FLAG: crypto{linear_padding_isnt_padding}
 
 ---
 
-# 24. Null or Never
+## 24. Null or Never
 
-## Given
+### Given
 Bài toán yêu cầu giải mã thông điệp đã được mã hóa RSA sử dụng một phương thức padding tùy chỉnh. Mỗi lần mã hóa, padding sẽ được áp dụng để đảm bảo rằng thông điệp có độ dài cố định. Padding được sử dụng là padding `\x00`, có chiều dài 100 byte.
 
-### Tham số
+#### Tham số
 - **n**: Modulus được tạo ra từ hai số nguyên tố `p` và `q` (RSA key).
 - **e**: Mũ công khai (`e = 3`).
 - **c**: Dữ liệu mã hóa (ciphertext) được sinh từ thông điệp đã padding.
 
-## Goal
+### Goal
 - Thông điệp được padding sao cho độ dài luôn bằng 100 byte. Điều này có thể tạo ra một số vấn đề bảo mật, vì thông điệp ban đầu có thể dễ dàng bị đoán nếu ta biết cách padding.
 - Với padding `\x00`, thông điệp mã hóa có thể có những đặc điểm giúp ta giải mã hoặc rút ra được thông tin về flag.
 
-## Solution
+### Solution
 
-### 1. Phân tích mã hóa RSA
+#### 1. Phân tích mã hóa RSA
 Dữ liệu mã hóa (`c`) được sinh từ phương pháp RSA, với thông điệp đã padding và sử dụng công thức:
 
 \[
@@ -1428,10 +1429,10 @@ c = m^e \mod n
 
 Trong đó `m` là thông điệp đã padding. Vì `e = 3`, ta cần phải xem liệu có thể khai thác padding này để giảm số khả năng cần kiểm tra.
 
-### 2. Phương pháp padding
+#### 2. Phương pháp padding
 Padding được thực hiện sao cho thông điệp luôn có độ dài là 100 byte, và tất cả byte dư sẽ được thay thế bằng `\x00`. Do đó, việc phân tích padding có thể giúp ta đoán được giá trị của `m`.
 
-### 3. Giải mã
+#### 3. Giải mã
 Để giải mã, ta cần sử dụng các phương pháp tấn công RSA, đặc biệt là với **e = 3**. Một cách để giải mã là thử khai thác đặc điểm của padding và sử dụng công thức giải mã RSA:
 
 \[
@@ -1440,10 +1441,10 @@ m = c^d \mod n
 
 Trong đó `d` là chỉ số riêng tư và được tính là nghịch đảo của `e` modulo `φ(n)`.
 
-### 4. Khai thác giá trị `m`
+#### 4. Khai thác giá trị `m`
 Vì padding là `\x00` và thông điệp có độ dài cố định, ta có thể thử các cách khai thác để tìm giá trị ban đầu của thông điệp `m`, sau đó chuyển đổi `m` sang byte để lấy flag.
 
-## Code tìm FLAG
+### Code tìm FLAG
 ```python
 from Crypto.Util.number import bytes_to_long, long_to_bytes
 from CryptoHack_PGCD import PGCD_extended
@@ -1525,9 +1526,9 @@ crypto{n0n_574nd4rd_p4d_c0n51d3r3d_h4rmful}
 
 ---
 
-# 25. Signing Server
+## 25. Signing Server
 
-## Given
+### Given
 
 - Trong hệ mật mã RSA nguyên thủy (Textbook RSA), phép toán tạo chữ ký điện tử (Digital Signature) và phép toán giải mã (Decryption) là hoàn toàn đồng nhất về mặt toán học. 
 - Cụ thể, để ký một thông điệp $m$, hệ thống tính toán $s \equiv m^d \pmod N$. 
@@ -1538,11 +1539,11 @@ Dữ kiện bài toán: Phân tích mã nguồn (13374.py) cho thấy máy chủ
 + get_pubkey: Cung cấp tham số khóa công khai gồm module $N$ và số mũ $e$.
 + get_secret: Mã hóa cờ bí mật bằng khóa công khai và trả về bản mã $c \equiv secret^e \pmod N$.
 + sign: Nhận một thông điệp đầu vào dạng hex, thực thi phép ký bằng khóa bí mật và trả về kết quả $s \equiv msg^d \pmod N$.
-## Goal
+### Goal
 
 - Khai thác điểm yếu cấu trúc của hàm sign, sử dụng nó như một công cụ giải mã (Decryption Oracle) để khôi phục bản mã nhận được từ hàm get_secret về định dạng văn bản gốc (Flag).
 
-## Solution
+### Solution
 
 Lỗ hổng cốt lõi của máy chủ này là việc thực thi phép ký trực tiếp lên dữ liệu đầu vào mà không qua bước băm (hashing) hay đệm (padding) định dạng an toàn.
 
@@ -1575,20 +1576,20 @@ Kết quả: `crypto{d0n7_516n_ju57_4ny7h1n6}`
 
 ---
 
-# 26. Let's Decrypt
+## 26. Let's Decrypt
 
-## Given
+### Given
 
 Hệ thống yêu cầu xác thực quyền sở hữu domain bằng chữ ký số RSA. Phân tích mã nguồn cho thấy hai điểm quan trọng:
 + Hệ thống cung cấp sẵn một chữ ký điện tử ($signature$) hợp lệ thông qua hàm get_signature.
 + Hàm verify mắc lỗi thiết kế nghiêm trọng: Cho phép người dùng tự định nghĩa khóa công khai (nhập tùy ý tham số module $N$ và số mũ $e$) để xác thực thông điệp.
 
 
-## Goal
+### Goal
 
 Tạo ra một thông điệp ($msg$) theo yêu cầu (chứa chuỗi I am Mallory...) và đánh lừa hệ thống chấp nhận $signature$ cũ là chữ ký hợp lệ cho $msg$ này bằng cách thao túng $N$ và $e$.
 
-## Solution
+### Solution
 
 Cơ chế kiểm tra chữ ký của máy chủ dựa trên phương trình:
 $$signature^e \equiv digest \pmod N$$(Trong đó $digest$ là giá trị băm PKCS#1 v1.5 của thông điệp $msg$ ta gửi lên).
@@ -1637,18 +1638,18 @@ print(f"{json_recv()}")
 
 --- 
 
-# 27. Blinding Light
+## 27. Blinding Light
 
-## Given
+### Given
   
   - Hệ thống cho phép ký (sign) mọi thông điệp, ngoại trừ thông điệp chứa chuỗi admin=True. 
   - Để lấy Flag, ta cần cung cấp chữ ký hợp lệ cho chính chuỗi admin=True này trong hàm verify.
 
-## Goal
+### Goal
 
 Lợi dụng tính chất "đồng cấu nhân" (multiplicative homomorphic) của RSA để tạo ra chữ ký cho thông điệp admin=True mà không cần gửi trực tiếp thông điệp này cho hệ thống ký.
 
-## Solution
+### Solution
 
 RSA bảo toàn phép nhân: $(m_1 \cdot m_2)^d \equiv m_1^d \cdot m_2^d \pmod N$.
 Nghĩa là, chữ ký của một tích bằng tích của các chữ ký. Ta thực hiện các bước sau:
@@ -1702,18 +1703,18 @@ print(f"{json_recv()['response']}")
 
 ---
 
-# 28. Vote for Pedro
+## 28. Vote for Pedro
 
-## Given
+### Given
 
 - Hệ thống yêu cầu xác thực 3 thông điệp khác nhau để thu thập 3 mảnh ghép (shares). Các mảnh này khi XOR lại với nhau sẽ tạo thành Flag.
 - Ta vẫn được quyền tự set khóa công khai $N$ (với điều kiện không được là số nguyên tố), nhưng có một rào cản lớn: Ta phải gửi $N$ trước. Sau khi chốt $N$, server mới trả về một chuỗi suffix ngẫu nhiên và bắt buộc mọi thông điệp phải kết thúc bằng chuỗi này.
 - Vì suffix làm thay đổi hoàn toàn giá trị băm (digest $D$) của thông điệp sau khi đã chốt $N$, trick "ăn gian" $N = S - D$ ở bài trước đã bị vô hiệu hóa.2. Goal
-## Goal
+### Goal
 
 Tìm ra một module $N$ có cấu trúc đặc biệt sao cho: Dù giá trị băm $D$ có sinh ra là số nào đi chăng nữa, ta vẫn có thể giải bài toán Logarit Rời Rạc (Discrete Logarithm Problem): $S^e \equiv D \pmod N$ một cách nhanh chóng để tìm ra số mũ $e$.
 
-## Solution
+### Solution
 
 Quy trình khai thác:
 1. Lấy chữ ký $S$ từ server. Tìm một số nguyên tố nhỏ $p$ (ví dụ $p=3$) mà $S$ không chia hết cho $p$.
@@ -1736,19 +1737,19 @@ Sau khi chạy đoạn code trên ta có được: `{"option":"vote","vote":"a4c
 `crypto{y0ur_v0t3_i5_my_v0t3}`
 ---
 
-# 29. Let's Decrypt Again
+## 29. Let's Decrypt Again
 
-## Given
+### Given
 
 - Hệ thống yêu cầu xác thực 3 thông điệp khác nhau để nhận 3 mảnh bí mật (shares), XOR 3 mảnh này sẽ ra Flag.
 - Máy chủ bắt buộc ta gửi module $N$ trước. Sau đó, máy chủ sinh ra một chuỗi suffix ngẫu nhiên và bắt buộc nối vào đuôi mọi thông điệp. Điều này vô hiệu hóa việc tính toán trước giá trị băm $D$ để gài $N$.
 
-## Goal
+### Goal
 
 - Lựa chọn một module $N$ có cấu trúc toán học đặc biệt yếu để biến bài toán Logarit Rời Rạc (Discrete Logarithm Problem - DLP) từ "không thể giải" thành "giải trong tích tắc". 
 - Từ đó, với bất kỳ giá trị băm $D$ nào sinh ra từ suffix, ta đều tính ngược được số mũ $e$.
 
-## Solution
+### Solution
 
 - Điểm yếu cốt lõi là máy chủ chỉ kiểm tra $N$ không phải là số nguyên tố, nhưng không cấm $N$ là lũy thừa của một số nguyên tố ($N = p^k$).
 - Khi chọn $p$ là một số nguyên tố (ví dụ $p = 2010103$) và $k$ đủ lớn ($k = 50$), cấu trúc của nhóm nhân modulo $N$ trở nên cực kỳ yếu. 
