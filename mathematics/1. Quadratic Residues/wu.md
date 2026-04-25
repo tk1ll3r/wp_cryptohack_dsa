@@ -46,6 +46,6 @@
 
 - **Kết quả:**
 
-    ![alt text](image.png)
+    ![](assets/) => zha tự sửa
 
     => Nghiệm submit: 8

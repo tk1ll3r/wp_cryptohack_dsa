@@ -64,7 +64,7 @@
 
     Hai nghiệm thu được là `root` và `p - root`. Flag là nghiệm lớn hơn:
 
-    ![alt text](image.png)
+    ![alt text](image.png) => zha tự sửa
 
     > **Tại sao công thức này chỉ hoạt động khi $p \equiv 3 \pmod 4$?**
     >

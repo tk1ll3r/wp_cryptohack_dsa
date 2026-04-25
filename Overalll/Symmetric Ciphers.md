@@ -1596,6 +1596,14 @@ $$C_1 \oplus C_2 = (P_1 \oplus K) \oplus (P_2 \oplus K) = P_1 \oplus P_2$$
 #### Kết quả: `crypto{k3y57r34m_r3u53_15_f474l}`
 
 ## **20. Dancing Queen**
+### Given
+- Một challenge tên “Dancing Queen”.
+- Tác giả tự triển khai (custom) thuật toán ChaCha20 thay vì dùng chuẩn.
+- Có 2 file được cung cấp: chacha20.py (code triển khai thuật toán), output.txt (ciphertext / dữ liệu đã mã hóa)
+### Goal
+- Phân tích implementation ChaCha20 tùy chỉnh để tìm ra sai sót hoặc điểm yếu.
+- Từ đó giải mã output.txt và khôi phục plaintext.
+- Thu được flag dạng crypto{...}.
 
 ### Solution
 ```python
