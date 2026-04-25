@@ -787,3 +787,44 @@ print(key.n)
 ### 4. Kết quả
 `3931406272922523448436194599820093016241472658151801552845094518579507815990600459669259603645261532927611152984942840889898756532060894857045175300145765800633499005451738872081381267004069865557395638550041114206143085403607234109293286336393552756893984605214352988705258638979454736514997314223669075900783806715398880310695945945147755132919037973889075191785977797861557228678159538882153544717797100401096435062359474129755625453831882490603560134477043235433202708948615234536984715872113343812760102812323180391544496030163653046931414723851374554873036582282389904838597668286543337426581680817796038711228401443244655162199302352017964997866677317161014083116730535875521286631858102768961098851209400973899393964931605067856005410998631842673030901078008408649613538143799959803685041566964514489809211962984534322348394428010908984318940411698961150731204316670646676976361958828528229837610795843145048243492909`
 
+## **19. Transparency**
+
+![alt text](assets/general/19_1.png)
+![alt text](assets/general/19_2.png)
+### Given
+- Bối cảnh lý thuyết: Bài viết giải thích về cách hoạt động của chứng chỉ TLS/SSL khi kết nối HTTPS và vai trò của các tổ chức cấp phát chứng chỉ (Certificate Authority - CA). Nó cũng nêu ra rủi ro khi các CA bị hack (như vụ Comodo 2011 hay Symantec 2016), dẫn đến việc kẻ xấu có thể tạo ra chứng chỉ giả mạo cho bất kỳ trang web nào.
+
+- Cơ chế Certificate Transparency (CT): Để khắc phục rủi ro trên, từ 2018, cơ chế "Minh bạch chứng chỉ" ra đời. Cơ chế này bắt buộc các CA phải ghi log (nhật ký) công khai mọi chứng chỉ mà họ cấp phát. Bất kỳ ai cũng có thể tra cứu các log này.
+
+- File đính kèm: Đề bài cung cấp một file chứa RSA Public Key có định dạng PEM
+```pem
+-----BEGIN PUBLIC KEY-----
+MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAuYj06m5q4M8SsEQwKX+5
+NPs2lyB2k7geZw4rP68eUZmqODeqxDjv5mlLY2nz/RJsPdks4J+y5t96KAyo3S5g
+mDqEOMG7JgoJ9KU+4HPQFzP9C8Gy+hisChdo9eF6UeWGTioazFDIdRUK+gZm81c1
+iPEhOBIYu3Cau32LRtv+L9vzqre0Ollf7oeHqcbcMBIKL6MpsJMG+neJPnICI36B
+ZZEMu6v6f8zIKuB7VUHAbDdQ6tsBzLpXz7XPBUeKPa1Fk8d22EI99peHwWt0RuJP
+0QsJnsa4oj6C6lE+c5+vVHa6jVsZkpl2PuXZ05a69xORZ4oq+nwzK8O/St1hbNBX
+sQIDAQAB
+-----END PUBLIC KEY-----
+```
+### Goal
+- Dựa vào các tham số của khóa công khai (Public Key) trong file transparency.pem, bạn phải tìm ra tên miền phụ (subdomain) của trang web cryptohack.org đang sử dụng chứng chỉ TLS chứa khóa này.
+
+- Truy cập vào subdomain đó để lấy được flag.
+
+### Solution
+- Lấy mã băm: Chạy lệnh lấy SHA-256 của public key.
+
+```bash
+openssl pkey -outform der -pubin -in transparency.pem | sha256sum
+```
+- Tra cứu: Vào crt.sh và tìm kiếm mã băm có được ở trên (29ab37df0a4e4d252f0cf12ad854bede59038fdd9cd652cbc5c222edd26d77d2).
+
+- Tìm Subdomain: Nhìn vào kết quả, bạn sẽ thấy tên miền phụ: `thetransparencyflagishere.cryptohack.org`
+
+- Nhận Flag: Truy cập đường dẫn https://thetransparencyflagishere.cryptohack.org/ để lấy cờ.
+
+### Kết quả
+![alt text](assets/general/20.png)
+`crypto{c3rt1f1c4t3_tr4n5p4r3nc3_15_1mp0rt4nt}`
