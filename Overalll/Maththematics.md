@@ -1,5 +1,5 @@
 # Maththematics 
-## 1.Quadratic Residues
+## 1. Quadratic Residues
 ### Given
 
 - Một số định nghĩa:
@@ -48,11 +48,11 @@
 
 - **Kết quả:**
 
-    ![](assets/) => zha tự sửa
+    ![](assets/mathematics/1.png)
 
     => Nghiệm submit: 8
 
-## 2.Legendre Symbol
+## 2. Legendre Symbol
 
 ### Given
 - Một số nguyên tố 1024-bit: $p$
@@ -120,7 +120,7 @@
 
     Hai nghiệm thu được là `root` và `p - root`. Flag là nghiệm lớn hơn:
 
-    ![alt text](image.png) => zha tự sửa
+    ![](assets/mathematics/2.png)
 
     > **Tại sao công thức này chỉ hoạt động khi $p \equiv 3 \pmod 4$?**
     >
@@ -226,7 +226,7 @@ Tìm $r^2≡a \pmod p$, dùng thuật toán **Tonelli-Shanks**. Submit căn nh�
     print(flag)
     ```
 - **Flag:**
-    ![alt text](image.png) => zha tự sửa
+    ![](assets/mathematics/3.png)
 
 ## 4.Chinese Remainder Theorem
 > ### Given
