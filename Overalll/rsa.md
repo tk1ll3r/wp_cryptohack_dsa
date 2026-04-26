@@ -25,7 +25,7 @@
 
    <img width="60" height="25" alt="image" src="https://github.com/user-attachments/assets/e041b011-2303-4f55-b084-892fbf8ba39f" />
 
-   ---
+
 ## **2. Public_Keys**
   ### Given
 - RSA encryption hoạt động như sau:
