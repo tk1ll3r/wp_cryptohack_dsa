@@ -1,4 +1,4 @@
-# **A. General**
+# **General**
 ## **1. ASCII**
 
 ### Given

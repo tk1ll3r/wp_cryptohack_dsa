@@ -1,4 +1,4 @@
-# **Introduction**
+# **A. Introduction**
  
 
 ## **Finding Flags**
@@ -42,7 +42,7 @@ print("".join(chr(o ^ 0x32) for o in ords))
  ### **Chạy file với py3 ta được flag:**
 `crypto{z3n_0f_pyth0n}`
 
-![Ảnh chạy file](assets\introduction\2.png)
+![Ảnh chạy file](assets/introduction/2.png)
 
 
 ## **3. Network Attacks**

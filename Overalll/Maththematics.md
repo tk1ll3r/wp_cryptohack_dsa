@@ -126,7 +126,7 @@
     >
     > Vì khi đó $(p+1)/4$ là số nguyên, nên phép mũ `pow(qr, (p+1)//4, p)` cho kết quả chính xác. Với các trường hợp tổng quát hơn (khi $p \equiv 1 \pmod 4$), cần dùng thuật toán **Tonelli-Shanks** phức tạp hơn. 
 
-## **3. Modular Square Root **
+## **3. Modular Square Root**
 ### Given
 - Một số nguyên tố 2048-bit: $p$
 
@@ -614,7 +614,6 @@ print(flag)
 
 
 ## **7. Modular Binomials**
-![alt text](image-20-1.png)
 ### Given
 * **Modulus:** $N = p \cdot q$.
 * **Hai phương trình mã hóa nhị thức:**
@@ -742,8 +741,9 @@ pprint(ms)
 ```
 
 `crypto{m0dul4r_squ4r3_r00t}`
+
+
 ## **9. No Way Back Home**
-![alt text](image-25-1.png)
 ### Given
 * **Giao thức:** Đề bài mô tả một giao thức trao đổi khóa (Key Exchange) dựa trên RSA nhưng có tùy chỉnh. 
 * **Alice** chọn một giá trị bí mật $v$ có dạng: $v = (p \cdot r) \pmod n$, với $r$ là số ngẫu nhiên và $p, q$ là các thừa số của $n$.
@@ -928,8 +928,6 @@ try:
 except Exception as e:
     print(f"Lỗi khi giải mã: {e}")
 ```
-
-![alt text](image.png)
 
 `crypto{c0n1c_s3ct10n5_4r3_f1n1t3_gr0up5}`
 
