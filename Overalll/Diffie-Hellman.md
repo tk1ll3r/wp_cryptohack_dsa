@@ -377,7 +377,7 @@ Flag là
 
 - **Kết quả:**
 
-    ![alt text](image.png)
+    ![](assets/diffie-hellman/4.png)
 
 - **Flow minh hoạ:**
     ```text
@@ -483,7 +483,7 @@ Flag là
 
 - **Kết quả:**
 
-    ![alt text](image.png)
+    ![](assets/diffie-hellman/5.png)
 
 - **FLow minh hoạ:**
     ```text
@@ -633,7 +633,7 @@ Flag là
 
 - **Kết quả:**
 
-    ![alt text](image.png)
+    ![](assets/diffie-hellman/6.png)
 
 
 
