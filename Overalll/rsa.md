@@ -85,7 +85,7 @@
     >
     > Trong thực tế, RSA thường sử dụng $N$ có kích thước **2048-bit** hoặc **4096-bit** để việc phân tích thừa số trở nên bất khả thi đối với cả những siêu máy tính mạnh nhất hiện nay.
 
----
+
 ## **3. Euler's_Totient**
 ### Given
 - Cho hai số nguyên tố:
@@ -173,7 +173,7 @@
     >
     > **Điểm mấu chốt:** Nếu kẻ tấn công biết được $p$ và $q$, chúng có thể dễ dàng tính lại $\phi(N)$ rồi từ đó tìm ra $d$. Đây chính là lý do vì sao việc ngăn chặn **phân tích thừa số nguyên $N$** được coi là "trái tim" của toàn bộ hệ thống bảo mật RSA.
 
----
+
 
 ## **5. RSA Decryption**
 ### Given
@@ -224,7 +224,7 @@
 
   <img width="93" height="27" alt="image" src="https://github.com/user-attachments/assets/b3237cf3-6588-40b9-9cd9-3ed17222aa09" />
 
-  ---
+  
 ## **6. RSA Signatures**
  ### Given
 - Challenge cung cấp file `private.key` chứa RSA private key, và yêu cầu *ký số* (digital signature) lên `message = "crypto{Immut4ble_m3ssag1ng}"`.
@@ -716,7 +716,7 @@ print(wiener_attack(e, N))
 4.  [cite_start]**Tìm số mũ giải mã:** Tính số nghịch đảo modulo: $D_{total} = E_{total}^{-1} \pmod{\phi(N)}$. [cite: 1]
 5.  [cite_start]**Giải mã:** Tính $Flag = cipher^{D_{total}} \pmod N$ và chuyển đổi kết quả từ số nguyên sang dạng bytes. [cite: 1]
 
----
+
 ``` python 
 from Crypto.Util.number import long_to_bytes, inverse
 import math
@@ -1202,7 +1202,7 @@ hay tương đương:
 
 Đây là một dạng prime đặc biệt, thuộc nhóm prime có thể bị factor bằng kỹ thuật **Complex Multiplication (CM)**, còn hay được gọi là hướng tấn công kiểu **4p - 1 factorization**.
 
----
+
 
 ### Ý tưởng giải
 
@@ -1250,7 +1250,7 @@ p = 2036502927612137448623909363751805659117315356081608870497493422513763102602
 q = 34857423162121791604235470898471761566115159084585269586007822559458774716277164882510358869476293939176287610274899509786736824461740603618598549945273029479825290459062370424657446151623905653632181678065975472968242822859926902463043730644958467921837687772906975274812905594211460094944271575698004920372905721798856429806040099698831471709774099003441111568843449452407542799327467944685630258748028875103444760152587493543799185646692684032460858150960790495575921455423185709811342689185127936111993248778962219413451258545863084403721135633428491046474540472029592613134125767864006495572504245538373207974181
 ```
 
----
+
 
 ### Code giải
 
@@ -1286,7 +1286,7 @@ Vậy flag là:
 crypto{I_want_to_Break_Square-free_4p-1}
 ```
 
----
+
 <img width="503" height="106" alt="image" src="https://github.com/user-attachments/assets/85f60a63-66a0-4136-965a-699ceb53fa93" />
 
 
