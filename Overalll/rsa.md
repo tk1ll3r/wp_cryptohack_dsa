@@ -1,5 +1,5 @@
-# RSA
-## 1. Modular_Exponentiation
+# **C. RSA**
+## **1. Modular_Exponentiation**
 ### Given
 - Challenge giới thiệu về **modular exponentiation** — phép tính nền tảng của RSA:
     $$base^{exponent} \pmod {modulus}$$
@@ -26,7 +26,7 @@
    <img width="60" height="25" alt="image" src="https://github.com/user-attachments/assets/e041b011-2303-4f55-b084-892fbf8ba39f" />
 
    ---
-## 2. Public_Keys
+## **2. Public_Keys**
   ### Given
 - RSA encryption hoạt động như sau:
 
@@ -86,7 +86,7 @@
     > Trong thực tế, RSA thường sử dụng $N$ có kích thước **2048-bit** hoặc **4096-bit** để việc phân tích thừa số trở nên bất khả thi đối với cả những siêu máy tính mạnh nhất hiện nay.
 
 ---
-## 3. Euler's_Totient
+## **3. Euler's_Totient**
 ### Given
 - Cho hai số nguyên tố:
 
@@ -129,8 +129,8 @@
 
    <img width="555" height="28" alt="image" src="https://github.com/user-attachments/assets/d318f059-0941-481a-8ac6-a38912a2a4b9" />
 
-   ---
-## 4. Private_Keys
+
+## **4. Private_Keys**
   ### Given
 - Cho hai số nguyên tố và exponent public:
     $$p = 857504083339712752489993810777$$
@@ -175,7 +175,7 @@
 
 ---
 
-## 5. RSA Decryption
+## **5. RSA Decryption**
 ### Given
 - Các tham số RSA:
     - $N = 882564595536224140639625987659416029426239230804614613279163$
@@ -225,7 +225,7 @@
   <img width="93" height="27" alt="image" src="https://github.com/user-attachments/assets/b3237cf3-6588-40b9-9cd9-3ed17222aa09" />
 
   ---
-## 6. RSA Signatures
+## **6. RSA Signatures**
  ### Given
 - Challenge cung cấp file `private.key` chứa RSA private key, và yêu cầu *ký số* (digital signature) lên `message = "crypto{Immut4ble_m3ssag1ng}"`.
 
@@ -298,8 +298,8 @@
 
     > **Tại sao ký lên hash thay vì ký trực tiếp lên message?** Vì $m$ có thể dài tùy ý, trong khi RSA chỉ hoạt động trên số nguyên nhỏ hơn $N$. SHA256 luôn cho ra output 256-bit cố định, phù hợp để đưa vào phép tính RSA. Ngoài ra, hash còn đảm bảo tính **collision resistance** — kẻ tấn công không thể tạo message khác có cùng hash.
 
----
-## 7. Factoring
+
+## **7. Factoring**
 
 ### Given
 - Hệ mật mã RSA hoạt động dựa trên một module $N$ được tạo ra bằng cách nhân hai số nguyên tố bí mật $p$ và $q$ ($N = p \cdot q$). Tính bảo mật của RSA phụ thuộc hoàn toàn vào việc máy tính rất khó để phân tích $N$ ngược lại thành $p$ và $q$ nếu module đó đủ lớn.
@@ -318,8 +318,8 @@ Sử dụng các công cụ trực tuyến để phân tích, ở bài này mìn
 > Và kết quả được mình lấy từ trang web: 
 `19704762736204164635843`
  
----
-## 8. Inferius Prime
+
+## **8. Inferius Prime**
 
 ### Given
 - Cơ sở: Độ an toàn của hệ mật mã công khai RSA phụ thuộc hoàn toàn vào độ phức tạp tính toán của bài toán phân tích nhân tử số nguyên lớn (Integer Factorization Problem - IFP). Theo các tiêu chuẩn an toàn thông tin hiện hành, module $N$ đòi hỏi kích thước tối thiểu từ 2048-bit để chống lại các kỹ thuật phân tích hiện đại.
@@ -359,8 +359,8 @@ print(long_to_bytes(decrypt))
 > Kết quả: 
 `b'crypto{N33d_b1g_pR1m35}'`
 
---- 
-## 9. Monoprime
+ 
+## **9. Monoprime**
 
 ### Given
 
@@ -394,8 +394,8 @@ print(long_to_bytes(decrypt))
 > Ra được kết quả: 
 `b'crypto{0n3_pr1m3_41n7_pr1m3_l0l}'`
 
---- 
-## 10. Square Eyes
+
+## **10. Square Eyes**
 
 ### Given
 - Trong quá trình sinh khóa RSA tiêu chuẩn, module $N$ bắt buộc phải là tích của hai số nguyên tố phân biệt ($N = p \cdot q$). 
@@ -433,8 +433,8 @@ print(long_to_bytes(decrypt))
 > Kết quả:
 `b'crypto{squar3_r00t_i5_f4st3r_th4n_f4ct0r1ng!}`
 
----
-## 11. ManyPrime
+
+## **11. ManyPrime**
 
 ### Given
 Bài toán cung cấp ba giá trị `n`, `e` và `ct` trong một hệ thống RSA, trong đó `n` là tích của nhiều số nguyên tố nhỏ.
@@ -499,8 +499,8 @@ print(long_to_bytes(m))
 
 Flag: `crypto{700_m4ny_5m4ll_f4c70r5}`
 
----
-## 12. Salty
+
+## **12. Salty**
 
 ### Given
 Bài toán yêu cầu giải mã dữ liệu RSA với các tham số `n`, `e`, và `ct` trong đó `n` là tích của nhiều số nguyên tố nhỏ.
@@ -545,8 +545,8 @@ print(flag)
 
 <img width="1482" height="385" alt="image" src="https://github.com/user-attachments/assets/6f4d9816-8a41-4d8e-b84d-d7f7fcdd0c75" />
 
----
-## 13. Modulus Inutilis
+
+## **13. Modulus Inutilis**
 
 ### Given
 - **Khóa công khai**: \( e = 3 \)
@@ -619,20 +619,20 @@ print(f"Flag: {flag.decode()}")
 
 <img width="1523" height="364" alt="image" src="https://github.com/user-attachments/assets/82bc956c-c115-4b1f-8e4e-bafeeb1934c6" />
 
----
-## 14. Everything is Big
+
+## **14. Everything is Big**
 
 <img width="2176" height="434" alt="image" src="https://github.com/user-attachments/assets/5e4c4783-4b6a-47f8-a1b0-3933dbb41fc9" />
 
-#### **1. Given**
+#### Given
 * [cite_start]Một hệ thống mã hóa RSA với các tham số $N$, $e$, và ciphertext $c$ có kích thước rất lớn (khoảng 2048 bits)[cite: 8].
 * [cite_start]File `Everything is Big.py` cho thấy số mũ công khai $e$ cũng rất lớn, gần tương đương với kích thước của $N$[cite: 8].
 * [cite_start]Thông thường trong RSA, người ta chọn $e$ nhỏ (như 65537) để tối ưu tốc độ mã hóa, nhưng ở đây $e$ được chọn "massive" (khổng lồ)[cite: 8].
 
-#### **2. Goal**
+#### Goal
 * Khai thác việc sử dụng số mũ công khai $e$ quá lớn để tìm ra số mũ bí mật $d$ và giải mã Flag.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Trong RSA, nếu số mũ công khai $e$ rất lớn và gần bằng $N$, điều đó thường có nghĩa là số mũ bí mật $d$ sẽ rất nhỏ. Theo **Định lý Wiener (Wiener's Attack)**, nếu số mũ bí mật $d$ thỏa mãn điều kiện:
@@ -687,9 +687,9 @@ print(wiener_attack(e, N))
 
 `crypto{s0m3th1ng5_c4n_b3_t00_b1g}`
 
----
-## 15. Crossed Wires
-### **1. Given**
+
+## **15. Crossed Wires**
+### Given
 * Một file `source.py` mô tả quy trình mã hóa: Flag được mã hóa liên tiếp qua nhiều người bạn, mỗi người sử dụng một số mũ công khai $e_i$ khác nhau nhưng dùng chung một Modulus $N$.
 * File `output.txt` cung cấp:
     * Modulus $N$.
@@ -697,10 +697,10 @@ print(wiener_attack(e, N))
     * Danh sách các số mũ công khai của bạn bè: `friend_es = [106979, 108533, 69557, 97117, 103231]`.
     * Bản mã cuối cùng `cipher`.
 
-### **2. Goal**
+### Goal
 * Khôi phục lại Flag ban đầu từ bản mã đã bị mã hóa chồng chéo qua nhiều lớp số mũ.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 1.  **Tính chất mã hóa RSA liên tiếp:** Khi một bản tin $m$ được mã hóa liên tiếp qua các số mũ $e_1, e_2, ..., e_n$ với cùng một $N$, bản mã cuối cùng sẽ là:
@@ -762,16 +762,16 @@ print(f"Flag: {long_to_bytes(flag_int).decode()}")
 
 <img width="976" height="96" alt="image" src="https://github.com/user-attachments/assets/7a347808-88b7-4f89-8f4e-df1b56d3419d" />
 
----
-## 16. Everything is Still Big
-### **1. Given**
+
+## **16. Everything is Still Big**
+### Given
 Một hệ thống mã hóa RSA với Modulus $N$, số mũ công khai $e$ và Ciphertext $ct$ đều là các số cực kỳ lớn (2048-bit)[cite: 11].
 Tên bài toán ám chỉ đây là phiên bản nâng cấp của "Everything is Big". [cite_start]Tuy nhiên, các giá trị $e$ và $d$ (số mũ bí mật) đã được điều chỉnh để tránh cuộc tấn công Wiener cơ bản[cite: 11].
 
-### **2. Goal**
+### Goal
 Khai thác cấu trúc của các số mũ RSA khi chúng quá lớn để tìm ra số mũ bí mật $d$ và giải mã Flag.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Mặc dù $e$ rất lớn, nhưng thử thách này vẫn đánh vào điểm yếu của việc chọn số mũ không an toàn. [cite_start]Khi $e$ có độ lớn xấp xỉ $N$, có khả năng cao là $d$ vẫn đủ nhỏ để bị tấn công bởi **Boneh-Durfee Attack**[cite: 11]. 
@@ -808,17 +808,17 @@ print(f"Flag: {long_to_bytes(m).decode()}")
 ```
 `crypto{bon3h5_4tt4ck_i5_sr0ng3r_th4n_w13n3r5}`
 
----
-## 17. Endless Emails
-### **1. Given**
+
+## **17. Endless Emails**
+### Given
 * Một danh sách nhiều cặp Modulus $n_i$ và Ciphertext $c_i$ tương ứng.
 * Tất cả các tin nhắn đều sử dụng cùng một số mũ công khai nhỏ: $e = 3$.
 * Bản rõ $m$ (Flag) được mã hóa nhiều lần với các khóa công khai khác nhau.
 
-### **2. Goal**
+### Goal
 * Khôi phục lại bản rõ $m$ khi biết cùng một nội dung được mã hóa với nhiều Modulus khác nhau nhưng dùng chung một số mũ $e$ nhỏ.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Đây là kịch bản điển hình của **Håstad's Broadcast Attack**. 
@@ -856,18 +856,17 @@ for i, j, k in combinations(range(7), 3):
 ```
 `crypto{1f_y0u_d0nt_p4d_y0u_4r3_Vuln3rabl3}`
 
----
 
-## 18. Infinite Descent
-### **1. Given**
+## **18. Infinite Descent**
+### Given
 * Một file `descent.py` mô tả cách sinh các số nguyên tố $p$ và $q$ cho hệ thống RSA.
 * Điểm đặc biệt: Để "tối ưu hóa" tốc độ, người tạo đã chọn $p$ và $q$ cực kỳ gần nhau (khoảng cách giữa chúng rất nhỏ).
 * File `output.txt` cung cấp giá trị Modulus $N$, số mũ công khai $e = 65537$, và Ciphertext $ct$.
 
-### **2. Goal**
+### Goal
 * Phân tích Modulus $N$ thành $p$ và $q$ khi biết chúng nằm rất gần nhau trên trục số, từ đó giải mã Flag.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Đây là kịch bản hoàn hảo cho **Thuật toán phân tích thừa số của Fermat (Fermat's Factorization Method)**.
@@ -965,10 +964,10 @@ if __name__ == '__main__':
 
 `crypto{f3rm47_w45_4_g3n1u5}`
 
----
 
-## 19.Marin's Secrets
-### **1. Given**
+
+## **19.Marin's Secrets**
+### Given
 * File `marin.py` mô tả cách sinh hai số nguyên tố $p$ và $q$ từ một danh sách bí mật.
 * Hàm `get_prime(secret)` thực hiện phép tính: `(1 << secret) - 1`. Đây chính là công thức của **Số nguyên tố Mersenne**: $M_n = 2^n - 1$.
 * File `output.txt` cung cấp:
@@ -976,10 +975,10 @@ if __name__ == '__main__':
     * Số mũ công khai $e = 65537$.
     * Ciphertext $c$.
 
-### **2. Goal**
+### Goal
 * Phân tích $n$ thành hai thừa số $p$ và $q$. Vì $p, q$ có dạng đặc biệt $2^x - 1$, việc tìm ra chúng dễ dàng hơn nhiều so với phân tích số nguyên thông thường.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Tên thử thách "Marin" ám chỉ nhà toán học **Marin Mersenne**. Các số nguyên tố Mersenne rất hiếm và đã được lập danh sách cụ thể. 
@@ -1001,18 +1000,18 @@ Thay vì dùng các thuật toán phân tích thừa số vạn năng như GNFS,
 `crypto{Th3se_Pr1m3s_4r3_t00_r4r3}`
 <img width="2068" height="78" alt="image" src="https://github.com/user-attachments/assets/16aa7525-dcba-4ab1-9932-44b70df62461" />
 
----
-## 20. Fast Primes
-### **1. Given**
+
+## **20. Fast Primes**
+### Given
 * Một hệ thống sinh khóa RSA được quảng cáo là "siêu nhanh" so với cách truyền thống.
 * File `key.pem` chứa khóa công khai (Public Key).
 * File `ciphertext.txt` chứa bản mã của flag, được mã hóa bằng chuẩn **PKCS1_OAEP**.
 * Bản chất của "Fast Primes" thường nằm ở việc sử dụng một bộ sinh số ngẫu nhiên (PRNG) yếu hoặc các số nguyên tố được sinh ra có cấu trúc đặc biệt để giảm thời gian kiểm tra tính nguyên tố.
 
-### **2. Goal**
+### Goal
 * Phân tích số Modulus $N$ từ khóa công khai để tìm ra hai thừa số nguyên tố $p$ và $q$, từ đó tính toán số mũ bí mật $d$ và giải mã flag.
 
-### **3. Solution**
+### Solution
 
 #### **Phân tích lỗ hổng**
 Trong các bài tập RSA "Fast Primes" (hoặc các lỗ hổng thực tế như ROCA), lỗ hổng thường nằm ở cách chọn $p$ và $q$. 
@@ -1066,18 +1065,18 @@ except ValueError as e:
 
 `crypto{p00R_3570n14}s`
 
----
 
-## 21. Ron was Wrong, Whit is Right
-### **1. Phân tích (Given)**
+
+## **21. Ron was Wrong, Whit is Right**
+### Given
 * **Dữ liệu:** Một file zip chứa 50 cặp file (khóa công khai `.pem` và bản mã `.ciphertext`).
 * **Giao thức:** Sử dụng RSA với chuẩn mã hóa PKCS#1 OAEP.
 * **Tên bài toán:** "Ron" (Rivest) và "Whit" (Diffie) ám chỉ các nhà sáng lập RSA và Diffie-Hellman. Lỗi này thường liên quan đến cách sinh số ngẫu nhiên kém dẫn đến trùng lặp.
 
-### **2. Mục tiêu (Goal)**
+### Goal
 * Phân tích 50 Modulus $N_i$ để tìm xem có cặp nào dùng chung số nguyên tố hay không. Nếu có, ta có thể phân tích thừa số $N$ ngay lập tức.
 
-### **3. Giải pháp (Solution)**
+### Solution
 
 #### **Lỗ hổng Batch GCD**
 Nếu hai Modulus $N_1 = p \cdot q_1$ và $N_2 = p \cdot q_2$ dùng chung một số nguyên tố $p$, ta có thể tìm ra $p$ cực nhanh bằng cách tính:
@@ -1167,9 +1166,9 @@ if __name__ == "__main__":
 ```
 `crypto{3ucl1d_w0uld_b3_pr0ud}`
 
----
 
-## 22. RSA Backdoor Viability
+
+## **22. RSA Backdoor Viability**
 
 ### Given
 Bài này cho file sinh khóa `complex_primes.py` và file `output.txt` chứa `n`, `e`, `c`.
@@ -1239,7 +1238,7 @@ Vì vậy hướng giải là:
    \]
 6. Đổi `m` sang bytes để lấy flag.
 
----
+
 
 ### Sau khi factor `n`
 
@@ -1272,7 +1271,6 @@ m = pow(c, d, n)
 print(long_to_bytes(m))
 ```
 
----
 
 ### Kết quả
 
@@ -1291,8 +1289,8 @@ crypto{I_want_to_Break_Square-free_4p-1}
 ---
 <img width="503" height="106" alt="image" src="https://github.com/user-attachments/assets/85f60a63-66a0-4136-965a-699ceb53fa93" />
 
----
-## 23. Bespoke Padding
+
+## **23. Bespoke Padding**
 
 ### Given
 Bài toán yêu cầu giải mã một thông điệp RSA có sử dụng padding tùy chỉnh. Mỗi lần mã hóa, flag được mã hóa với một padding khác nhau.
@@ -1333,7 +1331,7 @@ Dữ liệu nhận được bao gồm:
 
 Mục tiêu là sử dụng các giá trị này để khôi phục được thông điệp ban đầu (flag).
 
-### COde tìm FLAG
+### Code tìm FLAG
 ```python
 import socket
 import json
@@ -1402,9 +1400,9 @@ print(bytes.fromhex(hex(flag)[2:]).decode())
 FLAG: crypto{linear_padding_isnt_padding}
 <img width="1496" height="405" alt="image" src="https://github.com/user-attachments/assets/e905da8b-2da3-4e72-a3b6-460de4baf5b6" />
 
----
 
-## 24. Null or Never
+
+## **24. Null or Never**
 
 ### Given
 Bài toán yêu cầu giải mã thông điệp đã được mã hóa RSA sử dụng một phương thức padding tùy chỉnh. Mỗi lần mã hóa, padding sẽ được áp dụng để đảm bảo rằng thông điệp có độ dài cố định. Padding được sử dụng là padding `\x00`, có chiều dài 100 byte.
@@ -1524,9 +1522,9 @@ print(long_to_bytes(c_flag_decrypt))
 FLAG:
 crypto{n0n_574nd4rd_p4d_c0n51d3r3d_h4rmful}
 
----
 
-## 25. Signing Server
+
+## **25. Signing Server**
 
 ### Given
 
@@ -1574,9 +1572,9 @@ print(bytes.fromhex(received["signature"][2:]))
 ```
 Kết quả: `crypto{d0n7_516n_ju57_4ny7h1n6}`
 
----
 
-## 26. Let's Decrypt
+
+## **26. Let's Decrypt**
 
 ### Given
 
@@ -1636,9 +1634,9 @@ print(f"{json_recv()}")
 > Kết quả:
 `crypto{dupl1c4t3_s1gn4tur3_k3y_s3l3ct10n}`
 
---- 
+ 
 
-## 27. Blinding Light
+## **27. Blinding Light**
 
 ### Given
   
@@ -1701,9 +1699,9 @@ print(f"{json_recv()['response']}")
 `crypto{m4ll34b1l17y_c4n_b3_d4n63r0u5}`
 
 
----
 
-## 28. Vote for Pedro
+
+## **28. Vote for Pedro**
 
 ### Given
 
@@ -1735,9 +1733,9 @@ Sau khi chạy đoạn code trên ta có được: `{"option":"vote","vote":"a4c
 -> Kết nối tới Server và gửi cho nó
 > Kết quả:
 `crypto{y0ur_v0t3_i5_my_v0t3}`
----
 
-## 29. Let's Decrypt Again
+
+## **29. Let's Decrypt Again**
 
 ### Given
 
@@ -1800,8 +1798,6 @@ print(f"{flag}")
 ```
 > Kết quả: 
 `crypto{let's_decrypt_w4s_t0o_ez_do_1t_ag41n}`
-
----
 
 
 

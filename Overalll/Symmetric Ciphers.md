@@ -1,4 +1,4 @@
-# **Symmetric Ciphers**
+# **B. Symmetric Ciphers**
 ## **1. Keyed Permutations**
 ### Given
 Đề bài giới thiệu rằng AES là một **keyed permutation**.  
